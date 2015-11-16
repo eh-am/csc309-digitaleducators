@@ -24,4 +24,11 @@ $ meteor
 
 => App running at: http://localhost:3000/
 ```
-![E la vamos nos](http://2.bp.blogspot.com/-L-1wyzP8450/U-TvVEaiYHI/AAAAAAAADQQ/Kv_ySWQhncU/s1600/maxresdefault.jpg)
+![E la vamos nos](https://i.ytimg.com/vi/3N0nIj4kSAw/hqdefault.jpg)
+
+## Next Steps
+
+You don't have to worry about restarting your server, 'cause Meteor does that for you!
+Isn't that awesome? 
+
+Maybe you should read (and try) the [Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app) to understand how Meteor works and stuff. You're gonna love it.
