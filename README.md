@@ -21,3 +21,20 @@ $ grunt serve
 ```
 
 And access our page on http://localhost:9000/ !
+
+
+# Other stuff
+We are going to use 2 basic users for testing (just for keeping an standard),
+those are
+
+Admin
+```
+email: admin@admin.com
+password: admin
+```
+
+User
+```
+email: test@test.com
+password: test
+```
