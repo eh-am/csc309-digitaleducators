@@ -7,6 +7,8 @@
 
 
 <ul>
-  <li ng-repeat="question in questions">{{ question.text }}</li>
+  <li ng-repeat="question in questions">
+    {{ question.text }} by {{ question.author.name }}
+  </li>
 </ul>
 </div>

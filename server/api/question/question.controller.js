@@ -5,10 +5,17 @@ var Question = require('./question.model');
 
 // Get list of questions
 exports.index = function(req, res) {
-  Question.find(function (err, questions) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(questions);
-  });
+  Question
+    .find({})
+    .populate('author') // kinda like sql's join
+    .exec(function(err, questions){
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(questions);
+    });
+
+  // Question.find(function (err, questions) {
+
+  // });
 };
 
 // Get a single question
