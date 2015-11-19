@@ -1,0 +1,16 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div ng-show="isLoggedIn">
+    <h1>Tell us, what's your problem? </h1>
+
+    <form name="commentForm" ng-submit="addComment()">
+      <input type="text" ng-model="newQuestion" placeholder="What's your problem?">
+      <button class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
+    </form>
+  </div>
+
+  <div ng-hide="isLoggedIn">
+    <p>You are not logged in, therefore, you can not create any questions.</p>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('ddApp')
-  .controller('QuestionsCtrl', function ($scope, $http, socket) {
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, Auth) {
+    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.newQuestion = '';
 
     $http.get('/api/questions').success(function (questions){
@@ -12,5 +13,9 @@ angular.module('ddApp')
     $scope.addComment = function(){
       $http.post('/api/questions', { text: $scope.newQuestion });
       $scope.newQuestion = "";
+
+      $location.path('/questions');
+      //TODO
+      //redirect to the question
     }
   });

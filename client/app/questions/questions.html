@@ -1,14 +1,15 @@
-<div class="col-md-12">
+<div ng-include="'components/navbar/navbar.html'"></div>
 
-<form name="commentForm" ng-submit="addComment()">
-  <input type="text" ng-model="newQuestion" placeholder="What's your problem?">
-  <button class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
-</form>
+<div class="container">
+  <div class="col-md-12">
 
+  Would you like to <a href="/createquestions">Ask a question?</a>
 
-<ul>
-  <li ng-repeat="question in questions">
-    {{ question.text }} by {{ question.author.name }}
-  </li>
-</ul>
+  <h1>Questions</h1>
+  <ul>
+    <li ng-repeat="question in questions">
+      {{ question.text }} by {{ question.author.name }}
+    </li>
+  </ul>
+  </div>
 </div>
