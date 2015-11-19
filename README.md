@@ -38,3 +38,7 @@ User
 email: test@test.com
 password: test
 ```
+
+A nice walkthrough to understand what's the workflow when using 
+this generator can be found here:
+http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/
