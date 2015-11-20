@@ -14,10 +14,10 @@
       <div class="form-group">
         <label for=""><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Tags:</label>
         <span ng-repeat="tag in tags">
-          <input type="text" ng-model="tag.name" ng-blur="addTag($event)">
+          <input type="text" ng-model="tag.name" ng-blur="addTag($event)" placeholder="Excel, Word, etc">
         </span>
       </div>
-      
+
       <button type="submit" class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
     </form>
   </div>

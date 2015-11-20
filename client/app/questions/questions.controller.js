@@ -12,8 +12,12 @@ angular.module('ddApp')
     });
 
     $scope.addComment = function(){
-      $http.post('/api/questions', { text: $scope.newQuestion });
+      $http.post('/api/questions', {
+        text: $scope.newQuestion,
+        tags: cleanEmptyTags()
+      });
       $scope.newQuestion = "";
+      $scope.tags = [{ name: '' }];
 
       $location.path('/questions');
       //TODO
@@ -23,17 +27,18 @@ angular.module('ddApp')
     $scope.addTag = function($event){
       $event.preventDefault;
 
-      for (var i = 0; i < $scope.tags.length; i++){
-        if ($scope.tags[i].name.length <= 0){
-          // go back one position, as now the array is 1 position shorter
-          $scope.tags.splice(i--, 1);
-        }
-      }
-
+      $scope.tags = cleanEmptyTags();
       $scope.tags.push({
         name: ''
       });
 
     };
+
+    function cleanEmptyTags(){
+      return $scope.tags.filter(function (tag){
+        if (tag.name.length <= 0) return false;
+        return true;
+      });
+    }
 
   });
