@@ -19,6 +19,7 @@ angular.module('ddApp')
       });
 
       $http.post('/api/questions', {
+        title: $scope.title,
         text: $scope.newQuestion,
         tags: tagsArray
       });
