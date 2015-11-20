@@ -22,6 +22,10 @@ $ grunt serve
 
 And access our page on http://localhost:9000/ !
 
+##Troubleshooting
+
+If you run into file access/permission problems during the installation, please refer to this guide:
+https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md.
 
 # Other stuff
 We are going to use 2 basic users for testing (just for keeping an standard),
@@ -41,4 +45,6 @@ password: test
 
 A nice walkthrough to understand what's the workflow when using 
 this generator can be found here:
-http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/
+http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/.
+Keep the generator-angular-fullstack documentation in hand as well:
+https://github.com/DaftMonk/generator-angular-fullstack/blob/master/readme.md
