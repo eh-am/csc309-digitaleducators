@@ -10,6 +10,7 @@ var QuestionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  tags: [String],
   active: Boolean
 });
 

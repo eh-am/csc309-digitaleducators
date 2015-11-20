@@ -9,12 +9,18 @@ angular.module('ddApp')
 
     $http.get('/api/questions').success(function (questions){
       $scope.questions = questions;
+      console.log($scope.questions);
     });
 
     $scope.addComment = function(){
+      var tagsArray = [];
+      cleanEmptyTags().map(function(value){
+        tagsArray.push(value.name);
+      });
+
       $http.post('/api/questions', {
         text: $scope.newQuestion,
-        tags: cleanEmptyTags()
+        tags: tagsArray
       });
       $scope.newQuestion = "";
       $scope.tags = [{ name: '' }];
