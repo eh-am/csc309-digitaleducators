@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ddApp')
+angular.module('digitaleducatorsApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {

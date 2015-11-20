@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module('ddApp')
+angular.module('digitaleducatorsApp')
   .controller('QuestionsCtrl', function ($scope, $http, $location, socket, Auth) {
-    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
-
 
     $http.get('/api/questions').success(function (questions){
       $scope.questions = questions;

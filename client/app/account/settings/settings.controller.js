@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ddApp')
+angular.module('digitaleducatorsApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
 
