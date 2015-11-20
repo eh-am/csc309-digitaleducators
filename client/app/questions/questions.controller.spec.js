@@ -3,7 +3,7 @@
 describe('Controller: QuestionsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('ddApp'));
+  beforeEach(module('digitaleducatorsApp'));
 
   var QuestionsCtrl, scope;
 

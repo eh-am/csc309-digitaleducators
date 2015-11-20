@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ddApp')
+angular.module('digitaleducatorsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {

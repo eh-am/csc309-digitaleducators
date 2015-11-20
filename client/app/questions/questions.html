@@ -6,10 +6,21 @@
   Would you like to <a href="/createquestions">Ask a question?</a>
 
   <h1>Questions</h1>
-  <ul>
-    <li ng-repeat="question in questions">
-      {{ question.text }} by {{ question.author.name }}
+
+
+    <div ng-repeat="question in questions" class="question panel panel-default panel-primary">      
+        <div class="panel-heading"><a href="questions/{{ question._id }}">{{ question.title }} by {{ question.author.name }}</a></div>
+
+      <div class="panel-body">
+        {{ question.text }} 
+      </div>
+      <div class="panel-footer">
+        <span ng-repeat="tag in question.tags" class="badge">
+          {{ tag }}
+        </span>
+      </div>
     </li>
-  </ul>
+
+
   </div>
 </div>

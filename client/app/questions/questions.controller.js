@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('ddApp')
+angular.module('digitaleducatorsApp')
   .controller('QuestionsCtrl', function ($scope, $http, $location, socket, Auth) {
-    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.newQuestion = '';
+    $scope.tags = [{ name: '' }];
 
     $http.get('/api/questions').success(function (questions){
       $scope.questions = questions;
@@ -11,11 +12,39 @@ angular.module('ddApp')
     });
 
     $scope.addComment = function(){
-      $http.post('/api/questions', { text: $scope.newQuestion });
+      var tagsArray = [];
+      cleanEmptyTags().map(function(value){
+        tagsArray.push(value.name);
+      });
+
+      $http.post('/api/questions', {
+        title: $scope.title,
+        text: $scope.newQuestion,
+        tags: tagsArray
+      });
       $scope.newQuestion = "";
+      $scope.tags = [{ name: '' }];
 
       $location.path('/questions');
       //TODO
       //redirect to the question
+    };
+
+    $scope.addTag = function($event){
+      $event.preventDefault;
+
+      $scope.tags = cleanEmptyTags();
+      $scope.tags.push({
+        name: ''
+      });
+
+    };
+
+    function cleanEmptyTags(){
+      return $scope.tags.filter(function (tag){
+        if (tag.name.length <= 0) return false;
+        return true;
+      });
     }
+
   });
