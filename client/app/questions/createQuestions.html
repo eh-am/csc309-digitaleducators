@@ -5,8 +5,20 @@
     <h1>Tell us, what's your problem? </h1>
 
     <form name="commentForm" ng-submit="addComment()">
-      <input type="text" ng-model="newQuestion" placeholder="What's your problem?">
-      <button class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
+      <div class="form-group">
+
+        <label for="">Problem/Question?</label>
+        <textarea type="text" class="form-control" ng-model="newQuestion" placeholder="eg. How to download a youtube video?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for=""><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Tags:</label>
+        <span ng-repeat="tag in tags">
+          <input type="text" ng-model="tag.name" ng-blur="addTag($event)">
+        </span>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
     </form>
   </div>
 
