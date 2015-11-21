@@ -12,6 +12,12 @@ angular.module('digitaleducatorsApp')
           controller:'password'
         }
       },
+      changeProfileInfo: {
+        method: 'PUT',
+        params: {
+          controller:'profileinfo'
+        }
+      },
       get: {
         method: 'GET',
         params: {

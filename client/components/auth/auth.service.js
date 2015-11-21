@@ -93,6 +93,27 @@ angular.module('digitaleducatorsApp')
       },
 
       /**
+       * Change profile info
+       *
+       * @param  {Object}   profileinfo
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeProfileInfo: function(profileinfo, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeProfileInfo({ id: currentUser._id }, {
+          name: profileinfo.name,
+          location: profileinfo.location,
+          description: profileinfo.description
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Gets all available info on authenticated user
        *
        * @return {Object} user
