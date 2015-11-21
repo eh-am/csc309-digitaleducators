@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4>How many coffee coins would you need to help this person?</h4>
+</div>
+
+<div class="modal-body">
+  <form action="" ng-submit="submit($event)">
+    <div class="form-group">
+      <input type="range" ng-model="price" min={{minCoins}} max={{maxCoins}} >
+      <label for="">{{ price }} Coffee coins</label>
+
+    </div>
+    <button type="submit" class="btn btn-success">Apply for help</button>
+    <button type="button" class="btn" ng-click="$dismiss()">Cancel</button>
+  </form>
+</div>

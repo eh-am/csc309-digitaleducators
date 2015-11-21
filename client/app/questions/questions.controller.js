@@ -1,7 +1,8 @@
+
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('QuestionsCtrl', function ($scope, $http, $location, socket) {
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal) {
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
 
@@ -11,8 +12,35 @@ angular.module('digitaleducatorsApp')
     });
 
     $scope.applyForHelp = function(){
-      console.log("clicando");
-    }
+      var modal = $uibModal.open({
+        modal:{
+          dismissable: true, 
+        },        
+        templateUrl: 'app/questions/modal/applyModal.html',
+        controller: function applyController($scope, $uibModalInstance){
+
+          //TODO: change for real values
+          $scope.maxCoins = 10;
+          $scope.minCoins = 1;
+
+
+          // the default price
+          $scope.price = parseInt(($scope.maxCoins + $scope.minCoins) / 2);
+
+          $scope.submit = function($event){
+            $event.preventDefault();
+            console.log("submeti");
+
+            $uibModalInstance.dismiss();
+            
+            //TODO
+            //apply for help
+          };
+        },
+      });
+    };
+
+
     $scope.addComment = function(){
       var tagsArray = [];
       cleanEmptyTags().map(function(value){
