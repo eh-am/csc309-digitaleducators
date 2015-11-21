@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, Auth) {
-    $scope.isLoggedIn = Auth.isLoggedIn();
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket) {
+    
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
 

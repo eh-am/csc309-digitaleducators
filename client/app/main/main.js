@@ -5,7 +5,7 @@ angular.module('digitaleducatorsApp')
     $stateProvider
       .state('main', {
         url: '/',
+        controller: 'MainCtrl',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
       });
   });

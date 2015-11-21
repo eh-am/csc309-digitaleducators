@@ -26,13 +26,18 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="digitaleducatorsApp">
+  <body ng-app="digitaleducatorsApp" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    
+    <!-- <div ui-view name="nav"></div> -->
+    <div ng-controller="NavbarCtrl">
+      <div ng-include="'components/navbar/navbar.html'"></div>
+    </div>
+    <div ui-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>

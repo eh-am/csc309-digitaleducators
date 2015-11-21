@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth) {
+    $scope.isLoggedIn = Auth.isLoggedIn();
+
+    console.log("i am the main controller");
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -9,6 +12,7 @@ angular.module('digitaleducatorsApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
