@@ -9,7 +9,7 @@ exports.setup = function (User, config) {
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({
-        'google.id': profile.id
+        'email': profile.emails[0].value
       }, function(err, user) {
         if (!user) {
           user = new User({
@@ -20,6 +20,13 @@ exports.setup = function (User, config) {
             provider: 'google',
             google: profile._json
           });
+          user.save(function(err) {
+            if (err) return done(err);
+            done(err, user);
+          });
+        }
+        if (!user.google) {
+          user.google = profile._json;
           user.save(function(err) {
             if (err) return done(err);
             done(err, user);
