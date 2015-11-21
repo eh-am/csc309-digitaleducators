@@ -6,11 +6,11 @@ exports.setup = function (User, config) {
       clientID: config.facebook.clientID,
       clientSecret: config.facebook.clientSecret,
       callbackURL: config.facebook.callbackURL,
-      profileFields: ['email']
+      profileFields: ['displayName','email']
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({
-        'facebook.id': profile.id
+        'email': profile.emails[0].value
       },
       function(err, user) {
         if (err) {
@@ -25,6 +25,13 @@ exports.setup = function (User, config) {
             provider: 'facebook',
             facebook: profile._json
           });
+          user.save(function(err) {
+            if (err) return done(err);
+            done(err, user);
+          });
+        }
+        if (!user.facebook) {
+          user.facebook = profile._json;
           user.save(function(err) {
             if (err) return done(err);
             done(err, user);
