@@ -2,9 +2,7 @@
 
 angular.module('digitaleducatorsApp')
   .controller('MainCtrl', function ($scope, $http, socket, Auth) {
-    $scope.isLoggedIn = Auth.isLoggedIn();
-
-    console.log("i am the main controller");
+    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {

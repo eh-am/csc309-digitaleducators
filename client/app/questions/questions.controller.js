@@ -2,7 +2,6 @@
 
 angular.module('digitaleducatorsApp')
   .controller('QuestionsCtrl', function ($scope, $http, $location, socket) {
-    
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
 
@@ -11,6 +10,9 @@ angular.module('digitaleducatorsApp')
       console.log($scope.questions);
     });
 
+    $scope.applyForHelp = function(){
+      console.log("clicando");
+    }
     $scope.addComment = function(){
       var tagsArray = [];
       cleanEmptyTags().map(function(value){
@@ -24,6 +26,7 @@ angular.module('digitaleducatorsApp')
       });
       $scope.newQuestion = "";
       $scope.tags = [{ name: '' }];
+
 
       $location.path('/questions');
       //TODO
