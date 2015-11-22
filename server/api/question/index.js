@@ -11,6 +11,7 @@ router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.post('/applyForHelp', auth.isAuthenticated(), controller.applyForHelp);
 router.post('/acceptHelpFrom', auth.isAuthenticated(), controller.acceptHelpFrom);
+router.post('/endHelp', auth.isAuthenticated(), controller.endHelp);
 
 // I am using post so that we can restrict that only the own user can see
 // his/hers own data

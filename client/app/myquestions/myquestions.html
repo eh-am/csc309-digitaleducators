@@ -67,18 +67,22 @@
             
             
             <div ng-show="!isQuestionOpen(question)">
-              <div>
-                <span ng-show="question.status == 'in progress'">Being</span>
-                <span ng-show="question.status == 'closed'">Was</span>
+              <div ng-show="question.status == 'in progress'">
+                <div>
+                Being helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+                </div>
 
-                helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+                <div class="btn-group">
+                  <button class="btn btn-primary">Talk to this person</button>
+                  <button class="btn btn-warning" ng-click="closeHelp(question)">End help</button>
+                </div>
               </div>
 
-              <div>
-                Do you want to talk to him?
-                LINK TO INBOX HERE
+
+              <div ng-show="question.status == 'closed'">
+                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
               </div>
-              <!-- <a href="#">{{ helper.name }} (${{ helper.price }})</a>    -->
+              
             </div>
 
           </div>
