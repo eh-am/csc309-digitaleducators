@@ -60,7 +60,7 @@ angular.module('digitaleducatorsApp')
       $scope.tags = [{ name: '' }];
 
 
-      $location.path('/questions');
+      $location.path('/myquestions');
       //TODO
       //redirect to the question
     };

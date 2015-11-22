@@ -90,6 +90,19 @@ exports.applyForHelp = function(req, res){
   });
 };
 
+exports.myQuestions = function(req, res){
+  // return the questions
+  // of the logged in user
+  Question
+    .find({ "author" : req.user._id})
+    .populate('author') // kinda like sql's join
+    .populate('applicants.user') // kinda like sql's join
+    .exec(function(err, questions){
+      if(err) { console.log(err); return handleError(res, err); }
+      return res.status(200).json(questions);
+    });
+}
+
 function handleError(res, err) {
   return res.status(500).send(err);
 }

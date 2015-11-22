@@ -1,40 +1,42 @@
 <div class="container">
   <div class="col-md-12">
+    <div class="page-header">
+      <h1>Questions</h1>
+    </div>
+        
+    Would you like to <a href="/createquestions">Ask a question?</a><br /><br />
 
-  Would you like to <a href="/createquestions">Ask a question?</a>
 
-  <h1>Questions</h1>
+    <div ng-repeat="question in questions">
+      <div class="row">
+        <div class="question panel panel-default panel-primary">      
+          <div class="panel-heading">
+            <a href="questions/{{ question._id }}">{{ question.title }} by {{ question.author.name }}</a>
+          </div>
 
-  <div ng-repeat="question in questions">
-    <div class="row">
-      <div class="question panel panel-default panel-primary">      
-        <div class="panel-heading">
-          <a href="questions/{{ question._id }}">{{ question.title }} by {{ question.author.name }}</a>
-        </div>
+          <div class="panel-body">
+            {{ question.text }} 
+          </div>
 
-        <div class="panel-body">
-          {{ question.text }} 
-        </div>
-
-        <div class="panel-footer">
-          <span ng-repeat="tag in question.tags" class="badge">
-            {{ tag }}
-          </span>
+          <div class="panel-footer">
+            <span ng-repeat="tag in question.tags" class="badge">
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" ng-show="isLoggedIn()">
-      <div class="col-xs-12">
-        Do you think you can help this person? 
-        <button class="btn btn-success" ng-click="applyForHelp(question._id)">Apply for help</button> <br /><br /><br /><br />
+      <div class="row" ng-show="isLoggedIn()">
+        <div class="col-xs-12">
+          Do you think you can help this person? 
+          <button class="btn btn-success" ng-click="applyForHelp(question._id)">Apply for help</button> <br /><br /><br /><br />
+        </div>
       </div>
+
+
+
+
     </div>
-
-
-
-
-  </div>
 
   </div>
 </div>
