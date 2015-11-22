@@ -105,7 +105,8 @@ angular.module('digitaleducatorsApp')
         return User.changeProfileInfo({ id: currentUser._id }, {
           name: profileinfo.name,
           location: profileinfo.location,
-          description: profileinfo.description
+          description: profileinfo.description,
+          skype: profileinfo.skype
         }, function(user) {
           return cb(user);
         }, function(err) {

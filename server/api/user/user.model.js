@@ -14,6 +14,7 @@ var UserSchema = new Schema({
   },
   location: String,
   description: String,
+  skype: String,
   hashedPassword: String,
   provider: String,
   salt: String,

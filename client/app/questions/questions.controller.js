@@ -6,6 +6,8 @@ angular.module('digitaleducatorsApp')
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
 
+    console.log("oi");
+
     $http.get('/api/questions').success(function (questions){
       $scope.questions = questions;
     });

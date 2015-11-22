@@ -87,11 +87,13 @@ exports.changeProfileInfo = function(req, res, next) {
   var name = String(req.body.name);
   var location = String(req.body.location);
   var description = String(req.body.description);
+  var skype = String(req.body.skype);
 
   User.findById(userId, function (err, user) {
     user.name = name;
     user.location = location;
     user.description = description;
+    user.skype = skype;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.status(200).send('OK');

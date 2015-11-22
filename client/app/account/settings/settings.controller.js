@@ -11,7 +11,8 @@ angular.module('digitaleducatorsApp')
       var info = {
         name: $scope.me.name,
         location: $scope.me.location,
-        description: $scope.me.description
+        description: $scope.me.description,
+        skype: $scope.me.skype
       };
 
       if(profileform.$valid) {
