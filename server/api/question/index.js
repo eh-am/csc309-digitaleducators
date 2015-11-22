@@ -9,6 +9,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
+router.post('/applyForHelp', auth.isAuthenticated(), controller.applyForHelp);
 // TODO
 // uncomment to be able to update questions
 // router.put('/:id', auth.isAuthenticated(), controller.update);

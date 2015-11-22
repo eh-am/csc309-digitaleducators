@@ -11,8 +11,23 @@ var QuestionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+
+  applicants: [{
+    price: Number,
+    user: {  // people who applied to help
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  }],
+
+
   tags: [String],
-  active: Boolean
+  status: {
+    type: String,
+    enum: ['open', 'in progress', 'closed'],
+    default: 'open'
+  }
+  
 });
 
 module.exports = mongoose.model('Question', QuestionSchema);

@@ -3,6 +3,8 @@
 angular.module('digitaleducatorsApp')
   .controller('MainCtrl', function ($scope, $http, socket, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {

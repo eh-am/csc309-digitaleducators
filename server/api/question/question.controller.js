@@ -8,14 +8,11 @@ exports.index = function(req, res) {
   Question
     .find({})
     .populate('author') // kinda like sql's join
+    .populate('applicants.user') // kinda like sql's join
     .exec(function(err, questions){
       if(err) { return handleError(res, err); }
       return res.status(200).json(questions);
     });
-
-  // Question.find(function (err, questions) {
-
-  // });
 };
 
 // Get a single question
@@ -66,6 +63,30 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
+  });
+};
+
+
+
+exports.applyForHelp = function(req, res){
+  Question.findById(req.body.questionId, function (err, question) {
+    var applicants = [{
+      user: req.user._id, 
+      price: req.body.price      
+    }];
+
+    var updated = question;
+
+    // concat the old applicants with the new one
+    updated.applicants = applicants.concat(updated.applicants);
+    
+
+    updated.save(function (err) {
+      if (err) { return handleError(res, err);}
+
+      return res.status(200).json(question);
+    });
+
   });
 };
 

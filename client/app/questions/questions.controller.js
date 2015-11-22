@@ -8,10 +8,9 @@ angular.module('digitaleducatorsApp')
 
     $http.get('/api/questions').success(function (questions){
       $scope.questions = questions;
-      console.log($scope.questions);
     });
 
-    $scope.applyForHelp = function(){
+    $scope.applyForHelp = function(questionId){
       var modal = $uibModal.open({
         modal:{
           dismissable: true, 
@@ -29,9 +28,14 @@ angular.module('digitaleducatorsApp')
 
           $scope.submit = function($event){
             $event.preventDefault();
-            console.log("submeti");
-
             $uibModalInstance.dismiss();
+
+            $http.post('/api/questions/applyForHelp', {
+              questionId : questionId,
+              price: $scope.price
+            }).success(function (data, status){
+
+            });
             
             //TODO
             //apply for help
