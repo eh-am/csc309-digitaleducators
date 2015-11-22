@@ -7,7 +7,7 @@ angular.module('digitaleducatorsApp')
     $scope.tags = [{ name: '' }];
 
     $http.get('/api/questions').success(function (questions){
-      $scope.questions = questions;
+      $scope.questions = questions;      
     });
 
     $scope.applyForHelp = function(questionId){

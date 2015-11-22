@@ -11,6 +11,13 @@ var QuestionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  // person who helped
+  helper : {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  price: Number, // the price to get this question answered (which the applicant
+                 // stated)
 
   applicants: [{
     price: Number,

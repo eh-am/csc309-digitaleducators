@@ -40,20 +40,54 @@
       <div class="row" ng-show="questionStatus == 'all' || question.status == questionStatus">
         <div class="question panel panel-default panel-primary">      
           <div class="panel-heading">
-            <a href="questions/{{ question._id }}">{{ question.title }} by {{ question.author.name }}</a>
+            {{ question.title }} by {{ question.author.name }}
           </div>
 
           <div class="panel-body">
             {{ question.text }} 
-          </div>
 
-          <div class="panel-footer">
             <span ng-repeat="tag in question.tags" class="badge">
               {{ tag }}
             </span>
           </div>
+
+          <div class="panel-footer">
+            <div ng-show="isQuestionOpen(question)">
+              Applicants to help:
+              <div ng-repeat="applicant in question.applicants">
+                <div class="applicants-list">
+                  <span>
+                  <a href="#">{{ applicant.user.name }} (${{ applicant.price }})</a> 
+                  <span>
+                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person!</a>
+                  </span>
+                </div>            
+              </div> 
+            </div>
+            
+            
+            <div ng-show="!isQuestionOpen(question)">
+              <div>
+                <span ng-show="question.status == 'in progress'">Being</span>
+                <span ng-show="question.status == 'closed'">Was</span>
+
+                helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+              </div>
+
+              <div>
+                Do you want to talk to him?
+                LINK TO INBOX HERE
+              </div>
+              <!-- <a href="#">{{ helper.name }} (${{ helper.price }})</a>    -->
+            </div>
+
+          </div>
         </div>
+
+
       </div>
+
+      
 
 
 

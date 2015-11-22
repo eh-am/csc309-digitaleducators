@@ -10,10 +10,12 @@ router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.post('/applyForHelp', auth.isAuthenticated(), controller.applyForHelp);
+router.post('/acceptHelpFrom', auth.isAuthenticated(), controller.acceptHelpFrom);
 
 // I am using post so that we can restrict that only the own user can see
 // his/hers own data
 router.post('/myQuestions', auth.isAuthenticated(), controller.myQuestions);
+
 // TODO
 // uncomment to be able to update questions
 // router.put('/:id', auth.isAuthenticated(), controller.update);

@@ -8,6 +8,7 @@ exports.index = function(req, res) {
   Question
     .find({})
     .populate('author') // kinda like sql's join
+    .populate('helper') // kinda like sql's join
     .populate('applicants.user') // kinda like sql's join
     .exec(function(err, questions){
       if(err) { return handleError(res, err); }
@@ -96,12 +97,33 @@ exports.myQuestions = function(req, res){
   Question
     .find({ "author" : req.user._id})
     .populate('author') // kinda like sql's join
+    .populate('helper') // kinda like sql's join
     .populate('applicants.user') // kinda like sql's join
     .exec(function(err, questions){
       if(err) { console.log(err); return handleError(res, err); }
       return res.status(200).json(questions);
     });
-}
+};
+
+exports.acceptHelpFrom = function(req, res){
+
+  Question.findById(req.body.questionId, function (err, question) {
+    var updated = question;
+
+    // the helper is the applicantId
+    updated.price = req.body.price;
+    updated.helper = req.body.applicantId;
+    // question now is "in progress"
+    updated.status = 'in progress';
+
+    updated.save(function (err) {
+      if (err) { return handleError(res, err);}
+
+      return res.status(200).json(question);
+    });
+
+  });
+};
 
 function handleError(res, err) {
   return res.status(500).send(err);
