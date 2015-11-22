@@ -12,9 +12,18 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  location: String,
-  description: String,
-  skype: String,
+  location: {
+    type: String,
+    default: ''
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  skype: {
+    type: String,
+    default: ''
+  },
   hashedPassword: String,
   provider: String,
   salt: String,
