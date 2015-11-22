@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="row" ng-show="isLoggedIn()">
+      <div class="row" ng-show="isLoggedIn() && !isOwner(question)">
         <div class="col-xs-12">
           Do you think you can help this person? 
           <button class="btn btn-success" ng-click="applyForHelp(question._id)">Apply for help</button> <br /><br /><br /><br />

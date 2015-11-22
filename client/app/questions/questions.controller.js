@@ -75,6 +75,16 @@ angular.module('digitaleducatorsApp')
 
     };
 
+    // checks if the person is owner of the question
+    // a user can't respond his/hers own question
+    $scope.isOwner = function(question){
+      if ($scope.$parent.getCurrentUser()._id == question.author._id){
+        return true;
+      }
+      
+      return false;
+    }
+
     function cleanEmptyTags(){
       return $scope.tags.filter(function (tag){
         if (tag.name.length <= 0) return false;
