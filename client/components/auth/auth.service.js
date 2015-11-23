@@ -106,7 +106,8 @@ angular.module('digitaleducatorsApp')
           name: profileinfo.name,
           location: profileinfo.location,
           description: profileinfo.description,
-          skype: profileinfo.skype
+          skype: profileinfo.skype,
+          areas: profileinfo.areas
         }, function(user) {
           return cb(user);
         }, function(err) {

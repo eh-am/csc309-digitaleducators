@@ -44,6 +44,13 @@
                  mongoose-error/>
         </div>
 
+        <div class="form-group">
+          <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Specialist in:</label>
+          <span ng-repeat="area in me.areas">
+            <input type="text" ng-model="area.name" ng-blur="addArea($event)" placeholder="Excel, Word, etc" >
+          </span>
+        </div>
+
         <p class="help-block"> {{ profilemessage }} </p>
 
         <p class="help-block" ng-show="profileform.$error.mongoose">
@@ -59,7 +66,7 @@
       <h1>Change Password</h1>
     </div>
     <div class="col-sm-12">
-      <p>You have connected to Digital Educators using Facebook and/or Google+, therefore you don't have to set a password.</p>
+      <p ng-show="(me.provider != 'local')">You have connected to Digital Educators using Facebook and/or Google+, therefore you don't have to set a password.</p>
 
       <form class="form" name="form" ng-show="(me.provider == 'local')" ng-submit="changePassword(form)" novalidate>
 

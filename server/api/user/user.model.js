@@ -24,6 +24,9 @@ var UserSchema = new Schema({
     type: String,
     default: ''
   },
+  areas: [{
+        name: String
+    }],
   hashedPassword: String,
   provider: String,
   salt: String,
@@ -112,6 +115,9 @@ var validatePresenceOf = function(value) {
 UserSchema
   .pre('save', function(next) {
     if (!this.isNew) return next();
+
+    if (this.areas.length == 0)
+      this.areas.push({ name: '' });
 
     if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
       next(new Error('Invalid password'));

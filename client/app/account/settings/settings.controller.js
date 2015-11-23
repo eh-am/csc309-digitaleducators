@@ -1,18 +1,21 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $uibModal, User, Auth) {
     $scope.errors = {};
     $scope.me = User.get();
 
     $scope.changeProfileInfo = function(profileform) {
       $scope.profilesubmitted = true;
 
+      //$scope.me.areas = cleanEmptyAreas();
+
       var info = {
         name: $scope.me.name,
         location: $scope.me.location,
         description: $scope.me.description,
-        skype: $scope.me.skype
+        skype: $scope.me.skype,
+        areas: $scope.me.areas
       };
 
       if(profileform.$valid) {
@@ -42,4 +45,18 @@ angular.module('digitaleducatorsApp')
         });
       }
 		};
+
+    $scope.addArea = function($event){
+      $event.preventDefault;
+
+      $scope.me.areas = cleanEmptyAreas();
+      $scope.me.areas.push({ name: '' });
+    };
+
+    function cleanEmptyAreas(){
+      return $scope.me.areas.filter(function (area){
+        if (area.name.length <= 0) return false;
+        return true;
+      });
+    }
   });
