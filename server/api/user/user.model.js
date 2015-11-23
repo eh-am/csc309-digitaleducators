@@ -56,6 +56,11 @@ UserSchema
   .get(function() {
     return {
       'name': this.name,
+      'email': this.email,
+      'location': this.location,
+      'description': this.description,
+      'skype': this.skype,
+      'areas': this.areas,
       'role': this.role
     };
   });

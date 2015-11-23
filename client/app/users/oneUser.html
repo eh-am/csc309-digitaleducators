@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>{{ oneUser.name }}'s Profile</h1>
+		</div>
+
+		<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+			<table class="table">
+			    <tr>
+			        <th scope="row">Name</th>
+			        <td>{{ oneUser.name }}</td>
+			    </tr>
+			    <tr>
+			        <th scope="row">E-mail</th>
+			        <td>{{ oneUser.email }}</td>
+			    </tr>
+			    <tr ng-show="oneUser.location">
+			        <th scope="row">Location</th>
+			        <td>{{ oneUser.location }}</td>
+			    </tr>
+			    <tr ng-show="oneUser.description">
+			        <th scope="row">Description</th>
+			        <td>{{ oneUser.description }}</td>
+			    </tr>
+			    <tr ng-show="oneUser.skype">
+			        <th scope="row">Skype</th>
+			        <td>{{ oneUser.skype }}</td>
+			    </tr>
+			    <tr>
+			        <th scope="row">Areas</th>
+			        <td><span ng-repeat="area in oneUser.areas" class="badge">{{ area.name }}</span></td>
+			    </tr>
+			</table>
+		</div>
+
+		<div class="hidden-xs col-sm-2 col-md-4 col-lg-6"></div>
+	</div>
+</div>
