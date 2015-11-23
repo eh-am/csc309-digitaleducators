@@ -27,6 +27,10 @@ var UserSchema = new Schema({
   areas: [{
         name: String
     }],
+  balance: {
+    type: Number,
+    default: 50 // EVERY USER HAS 50 "BONUS" POINTS 
+  },
   hashedPassword: String,
   provider: String,
   salt: String,

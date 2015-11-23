@@ -7,7 +7,7 @@ angular.module('digitaleducatorsApp')
     $scope.tags = [{ name: '' }];
 
     $http.get('/api/questions').success(function (questions){
-      $scope.questions = questions;
+      $scope.questions = questions;      
     });
 
     $scope.applyForHelp = function(questionId){
@@ -60,7 +60,7 @@ angular.module('digitaleducatorsApp')
       $scope.tags = [{ name: '' }];
 
 
-      $location.path('/questions');
+      $location.path('/myquestions');
       //TODO
       //redirect to the question
     };
@@ -74,6 +74,16 @@ angular.module('digitaleducatorsApp')
       });
 
     };
+
+    // checks if the person is owner of the question
+    // a user can't respond his/hers own question
+    $scope.isOwner = function(question){
+      if ($scope.$parent.getCurrentUser()._id == question.author._id){
+        return true;
+      }
+      
+      return false;
+    }
 
     function cleanEmptyTags(){
       return $scope.tags.filter(function (tag){

@@ -15,16 +15,57 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-        <li ng-class="{active: isActive('/questions')}"><a href="/questions">Questions</a></li>
         <li ng-class="{active: isActive('/users')}"><a href="/users">Users</a></li>
+    <li uib-dropdown is-open="status.isopen">
+      <a href="#" id="single-button" uib-dropdown-toggle ng-disabled="disabled">
+        Questions <span class="caret"></span>
+      </a>
+      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a href="/myquestions">My questions</a></li>
+        <li role="menuitem"><a href="#">My answers</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a href="/createquestions"><span class="btn btn-primary">Ask for help!</span></a></li>
+      </ul>
+    </li>
+    <li role="menuitem"><a href="/questions" class="btn btn-sm btn-default">Help someone!</a></li>
+
+
+<!--         <li class="dropdown" ng-class="{active: isActive('/questions')}">
+          <div class="dropdown-toggle" id="questionNavDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <a href="/questions">Questions</a>  
+
+              <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="questionNavDropdown">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+          </div>    
+        </li> -->
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello <a href="{{ '/users/'+getCurrentUser()._id }}">{{ getCurrentUser().name }}</a></p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}">
+          <a href="/signup">Sign up</a>
+        </li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}">          
+          <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        </li>
+
+
+        <li uib-dropdown is-open="status.isUserOpen" ng-show="isLoggedIn()">
+          <a href="#" id="single-button" uib-dropdown-toggle ng-disabled="disabled">
+            {{ getCurrentUser().name }} ({{ getCurrentUser().balance }} <img src="assets/images/coffeecoins.png" alt="">)<span class="caret"></span>
+          </a>
+          <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+
+            <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span> Edit Profile</a></li>
+            <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

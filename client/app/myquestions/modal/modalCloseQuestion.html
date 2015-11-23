@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4>Do you want to close this question?</h4>
+</div>
+
+<div class="modal-body">
+  <div class="alert alert-info">
+    Your funds are going to be debited in the value of <strong>{{ price }}</strong>
+    coffee coins.    
+  </div>
+
+  <div>
+    <button type="button" ng-disabled="!hasEnoughMoney()" class="btn btn-success" ng-click="endHelp()">End help</button>
+    <button type="button" class="btn" ng-click="$dismiss()">Cancel</button>
+  </div>
+
+</div>

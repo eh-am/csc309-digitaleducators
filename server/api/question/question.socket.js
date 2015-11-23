@@ -15,7 +15,17 @@ exports.register = function(socket) {
   });
 }
 
-function onSave(socket, doc, cb) {
+function onSave(socket, doc, cb) { 
+  // Question
+  // .find({ "author" : req.user._id})
+  // .populate(doc, {path: 'author'}) // kinda like sql's join
+  // .populate(doc, {path: 'helper'}) // kinda like sql's join
+  // .populate(doc, {path: 'applicants.user'}) // kinda like sql's join
+  // .exec(function(err, questions){
+  //   if(err) { console.log(err); return handleError(res, err); }
+  //   socket.emit('question:save', doc);
+  // });
+
   // broadcast to client the question with the author attached
   Question.populate(doc, {path:'author', select: 'name'}, function(err, comment) {
     socket.emit('question:save', doc);

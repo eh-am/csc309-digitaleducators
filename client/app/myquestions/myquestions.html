@@ -1,0 +1,102 @@
+
+<div class="container">
+  <div class="col-md-12">
+
+    Would you like to <a href="/createquestions">Ask a question?</a>
+
+    <div class="page-header">
+      <h1>My Questions</h1>
+    </div>
+        
+
+    <div class="form-group">
+      <div class="radio-inline">
+        <label for="all-questions">
+          <input type="radio" ng-model="questionStatus" value="all" name="optionFilterQuestions" id="all-questions" checked> All questions
+        </label>
+      </div>
+
+      <div class="radio-inline">
+        <label for="open-questions">
+          <input type="radio" ng-model="questionStatus" value="open" name="optionFilterQuestions" id="open-questions"> Open questions
+        </label>
+      </div>
+
+      <div class="radio-inline">
+        <label for="in-progress-questions">
+          <input type="radio" ng-model="questionStatus" value="in progress" name="optionFilterQuestions" id="in-progress-questions"> In progress questions
+        </label>
+      </div>      
+
+      <div class="radio-inline">
+        <label for="closed-questions">
+          <input type="radio" ng-model="questionStatus" value="closed" name="optionFilterQuestions" id="closed-questions"> Closed questions
+        </label>
+      </div>
+
+    </div>
+
+    <div ng-repeat="question in myQuestions">
+      <div class="row" ng-show="questionStatus == 'all' || question.status == questionStatus">
+        <div class="question panel panel-default panel-primary">      
+          <div class="panel-heading">
+            {{ question.title }} by {{ question.author.name }}
+          </div>
+
+          <div class="panel-body">
+            {{ question.text }} 
+
+            <span ng-repeat="tag in question.tags" class="badge">
+              {{ tag }}
+            </span>
+          </div>
+
+          <div class="panel-footer">
+            <div ng-show="isQuestionOpen(question)">
+              Applicants to help:
+              <div ng-repeat="applicant in question.applicants">
+                <div class="applicants-list">
+                  <span>
+                  <a href="#">{{ applicant.user.name }} (${{ applicant.price }})</a> 
+                  <span>
+                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person!</a>
+                  </span>
+                </div>            
+              </div> 
+            </div>
+            
+            
+            <div ng-show="!isQuestionOpen(question)">
+              <div ng-show="question.status == 'in progress'">
+                <div>
+                Being helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+                </div>
+
+                <div class="btn-group">
+                  <button class="btn btn-primary">Talk to this person</button>
+                  <button class="btn btn-warning" ng-click="closeHelp(question)">End help</button>
+                </div>
+              </div>
+
+
+              <div ng-show="question.status == 'closed'">
+                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+      
+
+
+
+
+    </div>
+
+  </div>
+</div>
