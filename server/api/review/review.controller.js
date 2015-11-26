@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var mongoose = require('mongoose');
 var Review = require('./review.model');
 
 // Get list of reviews
@@ -52,6 +53,38 @@ exports.destroy = function(req, res) {
       return res.status(204).send('No Content');
     });
   });
+};
+
+// Get reviews for one user, sort by most recent first
+exports.showUserReviews = function(req, res){
+  Review
+    .find({ 'user' : mongoose.Types.ObjectId(req.params.id)})
+    .populate('user', 'name')
+    .populate('reviewer', 'name')
+    .sort('-date')
+    .exec(function(err, reviews){
+      if(err) { console.log(err); return handleError(res, err); }
+      return res.status(200).json(reviews);
+    });
+};
+
+// Get statistics for one user
+exports.showUserStatistics = function(req, res){
+  Review
+    .aggregate([
+    { $match: { 
+      user: mongoose.Types.ObjectId(req.params.id) }
+    },
+    { $group: {
+      _id: '$user',
+      numReviews: { $sum: 1 },
+      avgRating: { $avg: '$rating' } }
+    }
+    ])
+    .exec(function(err, reviews){
+      if(err) { console.log(err); return handleError(res, err); }
+      return res.status(200).json(reviews);
+    });
 };
 
 function handleError(res, err) {

@@ -35,4 +35,75 @@
 
 		<div class="hidden-xs col-sm-2 col-md-4 col-lg-6"></div>
 	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+			<h2>Reviews and Ratings for {{ oneUser.name }}</h2>
+			<p>Would you like to <a role="button" href="#reviewUser" ng-click="isCollapsed = !isCollapsed">review or recommend {{ oneUser.name }}</a>?</p>
+
+			<div id="reviewUser" class="panel panel-default" uib-collapse="isCollapsed">
+				<div class="panel-body">
+				  <form class="form" name="reviewform" ng-show="(oneUser._id != me._id)" ng-submit="reviewUser(reviewform)" novalidate>
+
+			        <div class="form-group">
+			          <label>Rating</label>
+
+			           <uib-rating ng-model="myrate" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+
+					   <p>Your current rating: <b>{{ myrate }}</b><span ng-show="overStar != null"> - New rating: <b>{{ overStar }}</b></span></p>
+
+	    			   <button type="button" class="btn btn-sm btn-danger" ng-click="myrate = 0">Reset</button>
+			        </div>
+
+			        <div class="form-group">
+			          <label>Review</label>
+
+			          <textarea name="description" class="form-control" ng-model="myreview"
+			                 mongoose-error></textarea>
+
+			          <p class="help-block" ng-show="myreview.$error.required">
+			              You must write a review.
+			          </p>
+			        </div>
+
+			        <p class="help-block"> {{ reviewmessage }} </p>
+
+			        <p class="help-block" >
+			          {{ errors.myreview }}
+			        </p>
+
+			        <button class="btn btn-sm btn-primary" type="submit">Submit Review</button>
+			      </form>
+
+			      <p class="help-block" ng-show="(oneUser._id == me._id)">You can't review or rate yourself!</p>
+		  		</div>
+			</div>
+		</div>
+
+		<div class="hidden-xs col-sm-2 col-md-4 col-lg-4"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Overall Rating: <span class="glyphicon glyphicon-star" ng-show="statistics" ng-repeat="star in getStars(statistics.avgRating) track by $index"></span><span class="glyphicon glyphicon-star-empty" ng-show="statistics" ng-repeat="emptyStar in getEmptyStars(statistics.avgRating) track by $index"></span><span ng-show="!statistics">no rating</span></h3>
+			  </div>
+			  <div class="panel-body">
+			    Reviewed {{ statistics.numReviews || 0 }} times.
+			  </div>
+			</div>
+
+			<div class="panel panel-info" ng-repeat="oneReview in reviews">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Rating: <span class="glyphicon glyphicon-star" ng-repeat="star in getStars(oneReview.rating) track by $index"></span><span class="glyphicon glyphicon-star-empty" ng-repeat="emptyStar in getEmptyStars(oneReview.rating) track by $index"></span></h3>
+			  </div>
+			  <div class="panel-body">
+			    {{ oneReview.review }}
+			  </div>
+			  <div class="panel-footer">Reviewed by <a href="{{ '/users/'+oneReview.reviewer._id }}">{{ oneReview.reviewer.name }}</a> on {{ oneReview.date | date:'medium' }}</div>
+			</div>
+		</div>
+
+		<div class="hidden-xs col-sm-2 col-md-4 col-lg-4"></div>
+	</div>
 </div>
