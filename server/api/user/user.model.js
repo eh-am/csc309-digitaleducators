@@ -12,12 +12,25 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  location: {
+    type: String,
+    default: ''
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  skype: {
+    type: String,
+    default: ''
+  },
+  areas: [{
+        name: String
+    }],
   balance: {
     type: Number,
     default: 50 // EVERY USER HAS 50 "BONUS" POINTS 
   },
-  location: String,
-  description: String,
   hashedPassword: String,
   provider: String,
   salt: String,
@@ -46,7 +59,13 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
+      '_id': this._id,
       'name': this.name,
+      'email': this.email,
+      'location': this.location,
+      'description': this.description,
+      'skype': this.skype,
+      'areas': this.areas,
       'role': this.role
     };
   });
@@ -106,6 +125,9 @@ var validatePresenceOf = function(value) {
 UserSchema
   .pre('save', function(next) {
     if (!this.isNew) return next();
+
+    if (this.areas.length == 0)
+      this.areas.push({ name: '' });
 
     if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
       next(new Error('Invalid password'));
