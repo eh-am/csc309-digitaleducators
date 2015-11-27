@@ -20,8 +20,7 @@ angular.module('digitaleducatorsApp')
         price: person.price,
       }).success(function (question){
         loadQuestions();
-        //TODO
-        //show inbox?
+
         Flash.create('success', "You have accepted help from {{ person.user.name }}successfully.", 'flash-message');
       });
 
@@ -46,8 +45,7 @@ angular.module('digitaleducatorsApp')
             $http.post('/api/questions/endHelp', {questionId : question._id}).success(function (question){
               $uibModalInstance.dismiss();
               loadQuestions();
-              // TODO
-              // show flash message
+
               Flash.create('success', "You ended your help session successfully.", 'flash-message');
             });
             

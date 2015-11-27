@@ -67,7 +67,7 @@
             
             
             <div ng-show="!isQuestionOpen(question)">
-              <div ng-show="question.status == 'in progress'">
+              <div ng-show="question.status == 'in progress'">                
                 <div>
                 Being helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
                 </div>
@@ -77,11 +77,13 @@
                   <button class="btn btn-warning" ng-click="closeHelp(question)">End help</button>
                 </div>
               </div>
-
-
-              <div ng-show="question.status == 'closed'">
-                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
+              <div ng-show="question.status == 'closed'">                
+                <div>
+                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a> for the value of {{ question.price }} coffee coins. <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
+                </div>
               </div>
+
+
               
             </div>
 
