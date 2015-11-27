@@ -57,9 +57,9 @@
               <div ng-repeat="applicant in question.applicants">
                 <div class="applicants-list">
                   <span>
-                  <a href="#">{{ applicant.user.name }} (${{ applicant.price }})</a> 
+                  <a href="#">{{ applicant.user.name }}</a> 
                   <span>
-                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person!</a>
+                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person! (<strong>{{applicant.price}}</strong> coffee coins)</a>
                   </span>
                 </div>            
               </div> 
@@ -71,9 +71,9 @@
                 <div>
                 Being helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
                 </div>
-
+                <br /><br />
                 <div class="btn-group">
-                  <button class="btn btn-primary">Talk to this person</button>
+                  <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
                   <button class="btn btn-warning" ng-click="closeHelp(question)">End help</button>
                 </div>
               </div>

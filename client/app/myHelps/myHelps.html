@@ -47,8 +47,17 @@
               {{ tag }}
             </span>
           </div>
-
       </div>
+      <div class="alert alert-info" ng-show="question.status == 'open'">
+        Status: Waiting for acceptance to help.
+      </div>
+
+      <div class="btn-group pull-right" ng-show="question.status == 'in progress'">
+        <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
+      </div>
+
+      <br /><br />
+
     </div>
   </div>
 </div>
