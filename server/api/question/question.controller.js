@@ -17,6 +17,18 @@ exports.index = function(req, res) {
     });
 };
 
+exports.getOpenQuestions = function(req, res){
+  Question
+    .find({"status" : "open"})
+    .populate('author') // kinda like sql's join
+    .populate('helper') // kinda like sql's join
+    .populate('applicants.user') // kinda like sql's join
+    .exec(function(err, questions){
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(questions);
+    });
+};
+
 // Get a single question
 exports.show = function(req, res) {
   Question.findById(req.params.id, function (err, question) {

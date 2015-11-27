@@ -21,7 +21,7 @@ angular.module('digitaleducatorsApp')
       }).success(function (question){
         loadQuestions();
 
-        Flash.create('success', "You have accepted help from {{ person.user.name }}successfully.", 'flash-message');
+        Flash.create('success', "You have accepted help from {{ person.name }} successfully.", 'flash-message');
       });
 
     };
