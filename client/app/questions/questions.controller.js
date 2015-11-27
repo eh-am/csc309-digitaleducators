@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal) {
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal, Flash) {
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
 
@@ -10,7 +10,7 @@ angular.module('digitaleducatorsApp')
       $scope.questions = questions;      
     });
 
-    $scope.applyForHelp = function(questionId){
+    $scope.applyForHelp = function(questionId){            
       var modal = $uibModal.open({
         modal:{
           dismissable: true, 
@@ -34,7 +34,7 @@ angular.module('digitaleducatorsApp')
               questionId : questionId,
               price: $scope.price
             }).success(function (data, status){
-
+              Flash.create('success', "You applied successfully to help this person", 'flash-message');         
             });
             
             //TODO
@@ -45,7 +45,7 @@ angular.module('digitaleducatorsApp')
     };
 
 
-    $scope.addComment = function(){
+    $scope.addQuestion = function(){
       var tagsArray = [];
       cleanEmptyTags().map(function(value){
         tagsArray.push(value.name);
@@ -61,6 +61,7 @@ angular.module('digitaleducatorsApp')
 
 
       $location.path('/myquestions');
+      Flash.create('success', "You asked for help successfully.", 'flash-message');
       //TODO
       //redirect to the question
     };

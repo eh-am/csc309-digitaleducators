@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -38,10 +39,13 @@
     <!-- Add your site or application content here -->
     
     <!-- <div ui-view name="nav"></div> -->
+
     <div ng-controller="NavbarCtrl">
       <div ng-include="'components/navbar/navbar.html'"></div>
     </div>
-    <div ui-view></div>
+    <div flash-message=""></div> 
+    <div ui-view>      
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -69,6 +73,8 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->

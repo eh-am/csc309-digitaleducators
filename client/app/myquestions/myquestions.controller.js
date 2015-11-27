@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal) {
+  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash) {
     var loadQuestions = function(){
       $http.post('/api/questions/myQuestions').success(function (questions){
         $scope.questionStatus = "all";
@@ -22,7 +22,7 @@ angular.module('digitaleducatorsApp')
         loadQuestions();
         //TODO
         //show inbox?
-
+        Flash.create('success', "You have accepted help from {{ person.user.name }}successfully.", 'flash-message');
       });
 
     };
@@ -48,6 +48,7 @@ angular.module('digitaleducatorsApp')
               loadQuestions();
               // TODO
               // show flash message
+              Flash.create('success', "You ended your help session successfully.", 'flash-message');
             });
             
           }
