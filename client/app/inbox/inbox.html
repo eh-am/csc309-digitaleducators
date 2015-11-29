@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="col-md-12">
+    {{ message }} This is the inbox view.
+  </div>
+
+
+  <button ng-click="create()">Create</button>
+
+  <form action="" ng-submit="saySomething($event)">
+    <input type="text" ng-model="message">
+    <button>Say something</button>
+  </form>
+
+</div>
