@@ -1,10 +1,42 @@
 <div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-    </li>
-  </ul>
+  <div class="row">
+	<div class="col-xs-12">
+		<h1>Admin panel</h1>
+		<p>Manage and delete users.</p>
+	</div>
+
+	<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+		  <ul class="list-group">
+		    <li class="list-group-item" ng-repeat="user in users">
+		    	<div class="row">
+		    		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+				        <strong>{{user.name}}</strong><br>
+				        <span class="text-muted">{{user.email}}</span>
+				    </div>
+
+			        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 controlbuttons">
+				        <a href="{{ '/users/'+user._id }}" target="_blank"><span class="glyphicon glyphicon-user"></span></a>
+				        <a ng-click="edit(user)"><span class="glyphicon glyphicon-pencil"></span></a>
+				        <a ng-hide="me._id == user._id" ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+			    	</div>
+		    	</div>
+		    </li>
+		  </ul>
+	</div>
+
+	<div class="hidden-xs col-sm-2 col-md-4 col-lg-4"></div>
+  </div>
+
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Delete user</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete this user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="yes()">Yes</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
 </div>
