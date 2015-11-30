@@ -32,6 +32,8 @@ exports.show = function(req, res) {
 
 // Creates a new inbox in the DB.
 exports.create = function(req, res) {
+  console.log("body criando um inbox");
+  console.log(req.body);
   Inbox.create(req.body, function(err, inbox) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(inbox);

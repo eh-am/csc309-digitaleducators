@@ -18,11 +18,21 @@ angular.module('digitaleducatorsApp')
         questionId: question._id,
         applicantId: person.user._id,
         price: person.price,
-      }).success(function (question){
-        loadQuestions();
+      }).then(function (q){
 
+        // create an inbox for them
+        return $http.post('/api/inbox', {
+          question: question._id
+        });
+
+
+      }).then(function (inbox){
         Flash.create('success', "You have accepted help from "
-                    + person.user.name + " successfully.", 'flash-message');
+          + person.user.name + " successfully.", 'flash-message');
+
+        console.log("criei inbox");
+        console.log(inbox);
+        loadQuestions();
       });
 
     };

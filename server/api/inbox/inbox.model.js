@@ -7,7 +7,8 @@ var InboxSchema = new Schema({
   // the person who is being helped
   question : {
     type: Schema.Types.ObjectId,
-    ref: 'Question'
+    ref: 'Question',
+    required: true
   },
   messages:[{
     message: String, //the actual message
