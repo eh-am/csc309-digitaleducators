@@ -16,18 +16,18 @@
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/users')}"><a href="/users">Users</a></li>
-    <li uib-dropdown is-open="status.isopen">
+    <li ng-show="isLoggedIn()" uib-dropdown is-open="status.isopen">
       <a href="#" id="single-button" uib-dropdown-toggle ng-disabled="disabled">
         Questions <span class="caret"></span>
       </a>
-      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+      <ul  class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
         <li role="menuitem"><a href="/myquestions">My questions</a></li>
-        <li role="menuitem"><a href="#">My answers</a></li>
+        <li role="menuitem"><a href="/myhelps">My helps</a></li>
         <li class="divider"></li>
         <li role="menuitem"><a href="/createquestions"><span class="btn btn-primary">Ask for help!</span></a></li>
       </ul>
     </li>
-    <li role="menuitem"><a href="/questions" class="btn btn-sm btn-default">Help someone!</a></li>
+    <li role="menuitem" ng-show="isLoggedIn()"><a href="/questions" class="btn btn-sm btn-default">Help someone!</a></li>
     <li ng-class="{active: isActive('/faq')}"><a href="/faq">FAQ</a></li>
 
 

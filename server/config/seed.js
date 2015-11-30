@@ -8,7 +8,13 @@
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Question = require('../api/question/question.model');
+var Inbox = require('../api/inbox/inbox.model');
 
+
+
+Inbox.find({}).remove(function (){
+  console.log("Cleaned up inbox collection");  
+});
 
 
 Thing.find({}).remove(function() {

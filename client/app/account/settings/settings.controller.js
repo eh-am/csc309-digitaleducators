@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('SettingsCtrl', function ($scope, $uibModal, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $uibModal, User, Auth, Flash) {
     $scope.errors = {};
     $scope.me = User.get();
 
@@ -21,11 +21,13 @@ angular.module('digitaleducatorsApp')
       if(profileform.$valid) {
         Auth.changeProfileInfo(info)
         .then( function() {
-          $scope.profilemessage = 'Profile info successfully changed.';
+          // $scope.profilemessage = 'Profile info successfully changed.';
+          Flash.create('success', 'Profile info successfully changed.', 'flash-message');         
         })
         .catch( function() {
           profileform.$setValidity('mongoose', false);
-          $scope.errors.profile = 'An error occurred.';
+          Flash.create('danger', 'An error occurred.', 'flash-message');         
+          // $scope.errors.profile = 'An error occurred.';
           $scope.profilemessage = '';
         });
       }
@@ -36,12 +38,14 @@ angular.module('digitaleducatorsApp')
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
-          $scope.message = 'Password successfully changed.';
+          // $scope.message = 'Password successfully changed.';
+          Flash.create('success', 'Password successfully changed.', 'flash-message');         
         })
         .catch( function() {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
+          Flash.create('danger', 'Incorrect password', 'flash-message');         
+          // $scope.errors.other = 'Incorrect password';
+          // $scope.message = '';
         });
       }
 		};

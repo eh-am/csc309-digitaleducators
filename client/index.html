@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -22,7 +23,9 @@
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/faq/faq.css">
+      <link rel="stylesheet" href="app/inbox/inbox.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/myHelps/myHelps.css">
       <link rel="stylesheet" href="app/myquestions/myquestions.css">
       <link rel="stylesheet" href="app/users/users.css">
       <link rel="stylesheet" href="components/modal/modal.css">
@@ -37,10 +40,13 @@
     <!-- Add your site or application content here -->
     
     <!-- <div ui-view name="nav"></div> -->
+
     <div ng-controller="NavbarCtrl">
       <div ng-include="'components/navbar/navbar.html'"></div>
     </div>
-    <div ui-view></div>
+    <div flash-message=""></div> 
+    <div ui-view>      
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -68,6 +74,8 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -85,8 +93,12 @@
           <script src="app/admin/admin.js"></script>
           <script src="app/faq/faq.controller.js"></script>
           <script src="app/faq/faq.js"></script>
+          <script src="app/inbox/inbox.controller.js"></script>
+          <script src="app/inbox/inbox.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/myHelps/myHelps.controller.js"></script>
+          <script src="app/myHelps/myHelps.js"></script>
           <script src="app/myquestions/myquestions.controller.js"></script>
           <script src="app/myquestions/myquestions.js"></script>
           <script src="app/questions/questions.controller.js"></script>

@@ -6,7 +6,9 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/', auth.isAuthenticated(), controller.index);
+router.get('/getOpenQuestions', auth.isAuthenticated(), controller.getOpenQuestions);
+
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.post('/applyForHelp', auth.isAuthenticated(), controller.applyForHelp);
@@ -16,6 +18,7 @@ router.post('/endHelp', auth.isAuthenticated(), controller.endHelp);
 // I am using post so that we can restrict that only the own user can see
 // his/hers own data
 router.post('/myQuestions', auth.isAuthenticated(), controller.myQuestions);
+router.post('/myHelps', auth.isAuthenticated(), controller.myHelps);
 
 // TODO
 // uncomment to be able to update questions

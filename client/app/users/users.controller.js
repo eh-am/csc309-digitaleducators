@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('UsersCtrl', function ($scope, $http, $stateParams, User) {
+  .controller('UsersCtrl', function ($scope, $http, $stateParams, User, $state) {
 
     //Get all users
     $http.get('/api/users').success(function (users){
@@ -76,22 +76,24 @@ angular.module('digitaleducatorsApp')
       }).then(function successCallback(response) {
         $scope.reviewmessage = 'Review created!';
         $scope.errors.myreview = '';
+
+        $state.reload();
       }, function errorCallback(response) {
         $scope.errors.myreview = 'An error occurred.';
       });
     };
 
     $scope.getStars = function(rating) {
-        if(!rating)
-          return (new Array(0));
+      var r = rating;
+      if (isNaN(rating)) r = 0;
 
-        return (new Array(Math.round(rating)));
+      return (new Array(parseInt(r)));
     }
 
     $scope.getEmptyStars = function(rating) {
-        if(!rating)
-          return (new Array(0));
+      var r = rating;
+      if (isNaN(rating)) r = 0;
 
-        return (new Array(5-Math.round(rating)));
+      return (new Array(parseInt(5-r)));
     }
   });

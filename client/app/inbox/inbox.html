@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>Inbox</h1>
+    </div>
+
+
+    <h3>Question</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a href="questions" tooltip-placement="top" uib-tooltip="Go to questions">{{ inbox.question.title }}</a></h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          {{ inbox.question.text }}
+        </p>      
+        <div>
+          Helped: <a href="users/{{inbox.helped._id}}" tooltip-placement="right" uib-tooltip="Go to {{ inbox.helped.name }}'s profile ">{{ inbox.helped.name }}</a>
+        </div>
+        <div>
+          Helper: <a href="users/{{inbox.helper._id}}" tooltip-placement="right" uib-tooltip="Go to {{ inbox.helper.name }}'s profile ">{{ inbox.helper.name }}</a>
+        </div>
+          
+          
+      </div>
+    </div>
+  
+    <br />
+    <h3>Messages</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- <div class="message" ng-repeat="message in inbox.messages.slice().reverse()"> -->
+        <div class="message" ng-repeat="message in inbox.messages">
+          <strong>{{ message.author.name }}</strong>: <span>{{ message.message }}</span>
+        </div>
+      </div>
+    </div>
+
+
+    <form class="form-group" ng-submit="saySomething($event)">
+      <div class="form-group">
+        <label for="">Message:</label>
+        <textarea type="text" class="form-control" ng-model="newMessage" required></textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary pull-right">Say something</button>
+      </div>
+    </form>
+    <br />
+    <br />
+  </div>
+</div>

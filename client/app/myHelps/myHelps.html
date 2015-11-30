@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h1>My Helps</h1>
+    </div>
+
+    <div class="form-group">
+      <div class="radio-inline">
+        <label for="all-helps">
+          <input type="radio" ng-model="helpsStatus" value="all" name="optionFilterHelps" id="all-helps" checked> All Helps
+        </label>
+      </div>
+
+      <div class="radio-inline">
+        <label for="applied-helps">
+          <input type="radio" ng-model="helpsStatus" value="applied" name="optionFilterHelps" id="applied-helps"> Applied Helps
+        </label>
+      </div>
+
+      <div class="radio-inline">
+        <label for="in-progress-helps">
+          <input type="radio" ng-model="helpsStatus" value="in progress" name="optionFilterHelps" id="in-progress-helps"> In progress helps
+        </label>
+      </div>      
+
+      <div class="radio-inline">
+        <label for="closed-helps">
+          <input type="radio" ng-model="helpsStatus" value="closed" name="optionFilterHelps" id="closed-helps"> Closed helps
+        </label>
+      </div>
+
+    </div>
+
+
+    <div ng-repeat="question in myHelps">
+      <div class="row" ng-show="helpsStatus == 'all' || filterQuestion(question)">
+        <div class="question panel panel-default panel-primary">      
+          <div class="panel-heading">
+            {{ question.title }} by {{ question.author.name }}
+          </div>
+
+          <div class="panel-body">
+            {{ question.text }} 
+
+            <span ng-repeat="tag in question.tags" class="badge">
+              {{ tag }}
+            </span>
+          </div>
+      </div>
+      <div class="alert alert-info" ng-show="question.status == 'open'">
+        Status: Waiting for acceptance to help.
+      </div>
+
+      <div class="btn-group" ng-show="question.status == 'in progress'">
+        <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
+      </div>
+
+      <br /><br />
+
+    </div>
+  </div>
+
+    <div ng-if="questions.length === 0">
+      There is no answers available.
+    </div>     
+</div>

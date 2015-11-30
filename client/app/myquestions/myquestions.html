@@ -57,9 +57,9 @@
               <div ng-repeat="applicant in question.applicants">
                 <div class="applicants-list">
                   <span>
-                  <a href="#">{{ applicant.user.name }} (${{ applicant.price }})</a> 
+                  <a href="#">{{ applicant.user.name }}</a> 
                   <span>
-                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person!</a>
+                  <a class="btn btn-sm btn-success" ng-click="acceptHelpFrom(question, applicant)">Accept help from this person! (<strong>{{applicant.price}}</strong> coffee coins)</a>
                   </span>
                 </div>            
               </div> 
@@ -67,36 +67,36 @@
             
             
             <div ng-show="!isQuestionOpen(question)">
-              <div ng-show="question.status == 'in progress'">
+              <div ng-show="question.status == 'in progress'">                
                 <div>
                 Being helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
                 </div>
-
+                <br /><br />
                 <div class="btn-group">
-                  <button class="btn btn-primary">Talk to this person</button>
+                  <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
                   <button class="btn btn-warning" ng-click="closeHelp(question)">End help</button>
+                </div>
+              </div>
+              <div ng-show="question.status == 'closed'">                
+                <div>
+                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a> for the value of {{ question.price }} coffee coins. <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
                 </div>
               </div>
 
 
-              <div ng-show="question.status == 'closed'">
-                Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a>
-              </div>
               
             </div>
 
           </div>
         </div>
-
-
       </div>
-
-      
-
-
-
-
     </div>
+
+    <div ng-if="myQuestions.length === 0">
+      There is no questions available. <br />
+
+      Would you like to <a href="/createquestions">Ask a question?</a><br /><br />
+    </div>   
 
   </div>
 </div>

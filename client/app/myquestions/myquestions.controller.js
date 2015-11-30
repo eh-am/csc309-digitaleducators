@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal) {
+  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth) {
     var loadQuestions = function(){
       $http.post('/api/questions/myQuestions').success(function (questions){
         $scope.questionStatus = "all";
@@ -18,11 +18,20 @@ angular.module('digitaleducatorsApp')
         questionId: question._id,
         applicantId: person.user._id,
         price: person.price,
-      }).success(function (question){
-        loadQuestions();
-        //TODO
-        //show inbox?
+      }).then(function (q){
 
+        // create an inbox for them
+        return $http.post('/api/inbox', {
+          helper: person.user._id,
+          question: question._id
+        });
+
+
+      }).then(function (inbox){
+        Flash.create('success', "You have accepted help from "
+          + person.user.name + " successfully.", 'flash-message');
+
+        loadQuestions();
       });
 
     };
@@ -46,8 +55,8 @@ angular.module('digitaleducatorsApp')
             $http.post('/api/questions/endHelp', {questionId : question._id}).success(function (question){
               $uibModalInstance.dismiss();
               loadQuestions();
-              // TODO
-              // show flash message
+
+              Flash.create('success', "You ended your help session successfully.", 'flash-message');
             });
             
           }
