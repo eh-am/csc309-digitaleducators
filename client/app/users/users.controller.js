@@ -17,6 +17,15 @@ angular.module('digitaleducatorsApp')
 	    });
     }
 
+    //All users: sorting
+    $scope.sortKey = 'name';
+    $scope.reverse = false;
+
+    $scope.sort = function(key){
+      $scope.sortKey = key;
+      $scope.reverse = !$scope.reverse;
+    }
+
     //Stuff for reviews and ratings
     $scope.isCollapsed = true;
     $scope.myrate = 0;
@@ -24,9 +33,22 @@ angular.module('digitaleducatorsApp')
     $scope.me = User.get();
     $scope.errors = {};
 
-    $http.get('/api/users').success(function (users){
-      $scope.users = users;
+    //Get statistics for all users
+    $http.get('/api/reviews/statistics/all').success(function (users_stats){
+      $scope.users_stats = users_stats;
     });
+
+    $scope.searchStatistics = function(userid) {
+      var result = false;
+
+      angular.forEach($scope.users_stats, function(oneStat) {
+        if(oneStat._id == userid) {
+          return result = oneStat;
+        }
+      });
+
+      return result;
+    };
 
     if($stateParams.id){
       var uri = '/api/reviews/user/'+$stateParams.id;
@@ -60,10 +82,16 @@ angular.module('digitaleducatorsApp')
     };
 
     $scope.getStars = function(rating) {
-        return (new Array(rating));
+        if(!rating)
+          return (new Array(0));
+
+        return (new Array(Math.round(rating)));
     }
 
     $scope.getEmptyStars = function(rating) {
-        return (new Array(5-rating));
+        if(!rating)
+          return (new Array(0));
+
+        return (new Array(5-Math.round(rating)));
     }
   });

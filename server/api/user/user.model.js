@@ -25,12 +25,20 @@ var UserSchema = new Schema({
     default: ''
   },
   areas: [{
-        name: String
-    }],
+    name: String
+  }],
   balance: {
     type: Number,
     default: 50 // EVERY USER HAS 50 "BONUS" POINTS 
   },
+  // reviews: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Review'
+  // }],
+  // reviewsWritten: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Review'
+  // }],
   hashedPassword: String,
   provider: String,
   salt: String,

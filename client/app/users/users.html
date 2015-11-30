@@ -1,24 +1,37 @@
 <div class="container">
   <h1>All Users</h1>
+  	<p>Search for users by their names and areas of specialization.</p>
+  	<form id="searchusers" class="form-inline">
+        <div class="form-group">
+            <label>Search for users: </label>
+            <input type="text" class="form-control" ng-model="search" placeholder="Name, areas...">
+        </div>
+    </form>
 	<table id="user-list" class="table table-striped table-bordered table-hover table-responsive">
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>E-mail</th>
+				<th ng-click="sort('name')">Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+				<th ng-click="sort('areas')">Areas <span class="glyphicon sort-icon" ng-show="sortKey=='areas'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+				<th ng-click="sort('avgRating')">Rating <span class="glyphicon sort-icon" ng-show="sortKey=='avgRating'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+				<th ng-click="sort('numReviews')">Reviewed # times <span class="glyphicon sort-icon" ng-show="sortKey=='numReviews'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 			</tr>
 		</thead>
 
 		<tfoot>
 			<tr>
 				<th>Name</th>
-				<th>E-mail</th>
+				<th>Areas</th>
+				<th>Rating</th>
+				<th>Reviewed # times</th>
 			</tr>
 		</tfoot>
 
 		<tbody>
-			<tr ng-repeat="user in users">
+			<tr ng-repeat="user in users | orderBy:sortKey:reverse | filter:search">
 				<td><a href="{{ '/users/'+user._id }}">{{ user.name }}</a></td>
-				<td>{{ user.email }}</td>
+				<td><span ng-repeat="area in user.areas" class="badge">{{ area.name }}</span></td>
+				<td>{{ searchStatistics(user._id).avgRating || 0 }}</td>
+				<td>{{ searchStatistics(user._id).numReviews || 0 }}</td>
 			</tr>
 		</tbody>
 	</table>
