@@ -23,9 +23,8 @@ angular.module('digitaleducatorsApp')
           author: Auth.getCurrentUser()._id,
           message: $scope.newMessage
       }).success(function(message){
+        $scope.newMessage = "";
         updateMessages();
       });
     }
-
-
   });
