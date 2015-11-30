@@ -1,18 +1,27 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('InboxCtrl', function ($scope, $stateParams, $http, Auth) {
+  .controller('InboxCtrl', function ($scope, $stateParams, $http, Auth, socket) {
     $scope.inboxID = $stateParams.id;
 
     updateMessages();
 
     function updateMessages(){
       $http.get('/api/inbox/' + $scope.inboxID).success(function (inbox){
-        $scope.inbox = inbox;   
-        console.log("so vendo se esse inbox existe");
-        console.log(inbox);
+        $scope.inboxes = new Array(inbox);
+        $scope.inbox = inbox;
+
+
+        socket.syncUpdates('inbox', $scope.inboxes, function(event, inbox, inboxes){
+          $scope.inbox = inbox;
+        });
       });      
     }
+
+
+    $scope.$on('$destroy', function () {
+      socket.unsyncUpdates('inbox');
+    });
 
     $scope.saySomething = function(event){
       event.preventDefault();
@@ -24,7 +33,6 @@ angular.module('digitaleducatorsApp')
           message: $scope.newMessage
       }).success(function(message){
         $scope.newMessage = "";
-        updateMessages();
       });
     }
   });

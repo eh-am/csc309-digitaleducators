@@ -31,8 +31,6 @@ angular.module('digitaleducatorsApp')
         Flash.create('success', "You have accepted help from "
           + person.user.name + " successfully.", 'flash-message');
 
-        console.log("criei inbox");
-        console.log(inbox);
         loadQuestions();
       });
 

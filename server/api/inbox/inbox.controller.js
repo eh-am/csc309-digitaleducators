@@ -50,26 +50,36 @@ exports.addMessage = function(req, res) {
   // req.body.message
   // req.body._id
   // req.body.author
-  console.log("id " + req.body._id);
-  console.log("message " + req.body.message);
-  console.log("author " + req.body.author);
 
 
-  Inbox.findByIdAndUpdate(req.body._id,
-    {
-      $push: {
-        "messages": {
-          message : req.body.message,
-          author: req.body.author
-        }
-      }
-    },
-    {
-      new: true,
-    },    
-    function(err, inbox) {
+
+// Can't use findByIdandUpdate 'cause mongoose doesn't have a
+// middleware for update, so that socket.io can't emit a socket
+// when something is updated.
+// that way, we have to use findById then doc.save()
+
+  Inbox.findById(req.body._id, function(err, doc){
     if(err) { return handleError(res, err); }
-    return res.status(201).json(inbox);
+
+    // if the doc could be found
+    if (doc){
+
+      /* OBSERVATION  */
+      /* i am not sure javascript's native push method is good enough */
+
+
+      // add the new message
+      doc.messages.push({
+        message : req.body.message,
+        author: req.body.author
+      });
+
+      // and save it!
+      doc.save(function (err, inbox){
+        if(err) { return handleError(res, err); }
+        return res.status(201).json(inbox);
+      });
+    }
   });
 };
 
