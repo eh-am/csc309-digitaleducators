@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash) {
+  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth) {
     var loadQuestions = function(){
       $http.post('/api/questions/myQuestions').success(function (questions){
         $scope.questionStatus = "all";
@@ -22,6 +22,7 @@ angular.module('digitaleducatorsApp')
 
         // create an inbox for them
         return $http.post('/api/inbox', {
+          helper: person.user._id,
           question: question._id
         });
 

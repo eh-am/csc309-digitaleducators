@@ -5,6 +5,16 @@ var mongoose = require('mongoose'),
 
 var InboxSchema = new Schema({
   // the person who is being helped
+  helper: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  helped: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   question : {
     type: Schema.Types.ObjectId,
     ref: 'Question',
@@ -12,9 +22,10 @@ var InboxSchema = new Schema({
   },
   messages:[{
     message: String, //the actual message
-    person : { // the person who said that
+    author: { // the person who said that
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
     },
     postedAt: { type: Date, default: Date.now }, // when it was said
   }]

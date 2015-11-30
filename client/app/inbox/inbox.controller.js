@@ -4,29 +4,15 @@ angular.module('digitaleducatorsApp')
   .controller('InboxCtrl', function ($scope, $stateParams, $http, Auth) {
     $scope.inboxID = $stateParams.id;
 
-    console.log("id desse inbox  " + $scope.inboxID);
-    $http.get('/api/inbox/' + $scope.inboxID).success(function (inbox){
-      $scope.inbox = inbox;   
-      console.log("so vendo se esse inbox existe");
-      console.log(inbox);
-    });
+    updateMessages();
 
-    // $http.get('/api/questions/' + $scope.inboxID).success(function (question){
-    //   $scope.question = question;   
-    //   console.log(question);
-    // });
-
-    // TODO:
-    // mover isso aqui criar na hora que fechar um acordo
-
-    // $scope.create = function(){
-    //   console.log("criando");
-    //   $http.post('/api/inbox', {
-    //     question: $scope.inboxID
-    //   }).success(function (){
-    //     console.log("deu certo a criagem");
-    //   });      
-    // };
+    function updateMessages(){
+      $http.get('/api/inbox/' + $scope.inboxID).success(function (inbox){
+        $scope.inbox = inbox;   
+        console.log("so vendo se esse inbox existe");
+        console.log(inbox);
+      });      
+    }
 
     $scope.saySomething = function(event){
       event.preventDefault();
@@ -35,10 +21,9 @@ angular.module('digitaleducatorsApp')
       $http.post('/api/inbox/' + $scope.inboxID, {
           _id: $scope.inbox._id,
           author: Auth.getCurrentUser()._id,
-          message: "blalbalba"
+          message: $scope.newMessage
       }).success(function(message){
-        console.log("conseguiii criar mensagem");
-        console.log(message);
+        updateMessages();
       });
     }
 

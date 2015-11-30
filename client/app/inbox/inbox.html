@@ -1,14 +1,34 @@
 <div class="container">
   <div class="col-md-12">
-    {{ message }} This is the inbox view.
+    <div class="page-header">
+      <h1>Inbox</h1>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div>
+          {{ inbox.question.title }}
+          {{ inbox.question.text }}
+
+          Helped: {{ inbox.helped.name }}
+          Helper: {{ inbox.helper.name }}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div ng-repeat="message in inbox.messages">
+          <strong>{{ message.author.name }}</strong>: <span>{{ message.message }}</span>
+        </div>
+      </div>
+    </div>
+
+    <form action="" ng-submit="saySomething($event)">
+      <input type="text" ng-model="newMessage" required>
+      <button>Say something</button>
+    </form>
   </div>
-
-
-  <button ng-click="create()">Create</button>
-
-  <form action="" ng-submit="saySomething($event)">
-    <input type="text" ng-model="message">
-    <button>Say something</button>
-  </form>
-
 </div>

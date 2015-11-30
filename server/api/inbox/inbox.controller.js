@@ -16,7 +16,10 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
 
   Inbox.findOne({ question : req.params.id })
-      .populate('question') // kinda like sql's join
+    .populate('question') // kinda like sql's join
+    .populate('helped') // kinda like sql's join
+    .populate('helper') // kinda like sql's join
+    .populate('messages.author') // kinda like sql's join
       .exec(function(err, inbox){
         if(err) { return handleError(res, err); }
         if(!inbox) { return res.status(404).send('Not Found'); }
@@ -32,9 +35,11 @@ exports.show = function(req, res) {
 
 // Creates a new inbox in the DB.
 exports.create = function(req, res) {
-  console.log("body criando um inbox");
-  console.log(req.body);
-  Inbox.create(req.body, function(err, inbox) {
+  Inbox.create({
+    helped : req.user._id, // current user id
+    helper : req.body.helper,
+    question : req.body.question
+  }, function(err, inbox) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(inbox);
   });
