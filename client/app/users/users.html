@@ -10,19 +10,19 @@
 	<table id="user-list" class="table table-striped table-bordered table-hover table-responsive">
 		<thead>
 			<tr>
-				<th ng-click="sort('name')">Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-				<th ng-click="sort('areas')">Areas <span class="glyphicon sort-icon" ng-show="sortKey=='areas'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-				<th ng-click="sort('avgRating')">Rating <span class="glyphicon sort-icon" ng-show="sortKey=='avgRating'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-				<th ng-click="sort('numReviews')">Reviewed # times <span class="glyphicon sort-icon" ng-show="sortKey=='numReviews'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+				<th ng-click="sort('name')">Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('areas')">Areas <span class="glyphicon sort-icon" ng-show="sortKey=='areas'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('avgRating')">Rating <span class="glyphicon sort-icon" ng-show="sortKey=='avgRating'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('numReviews')">Reviewed # times <span class="glyphicon sort-icon" ng-show="sortKey=='numReviews'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
 			</tr>
 		</thead>
 
 		<tfoot>
 			<tr>
-				<th>Name</th>
-				<th>Areas</th>
-				<th>Rating</th>
-				<th>Reviewed # times</th>
+				<th ng-click="sort('name')">Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('areas')">Areas <span class="glyphicon sort-icon" ng-show="sortKey=='areas'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('avgRating')">Rating <span class="glyphicon sort-icon" ng-show="sortKey=='avgRating'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
+				<th ng-click="sort('numReviews')">Reviewed # times <span class="glyphicon sort-icon" ng-show="sortKey=='numReviews'" ng-class="{'glyphicon-sort-by-attributes-alt':reverse,'glyphicon-sort-by-attributes':!reverse}"></span></th>
 			</tr>
 		</tfoot>
 

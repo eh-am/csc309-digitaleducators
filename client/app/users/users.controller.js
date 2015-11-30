@@ -17,7 +17,7 @@ angular.module('digitaleducatorsApp')
 	    });
     }
 
-    //All users: sorting
+    //Sorting all users
     $scope.sortKey = 'name';
     $scope.reverse = false;
 
@@ -26,7 +26,9 @@ angular.module('digitaleducatorsApp')
       $scope.reverse = !$scope.reverse;
     }
 
+    //
     //Stuff for reviews and ratings
+    //
     $scope.isCollapsed = true;
     $scope.myrate = 0;
     $scope.max = 5;
@@ -38,6 +40,7 @@ angular.module('digitaleducatorsApp')
       $scope.users_stats = users_stats;
     });
 
+    //Search array of statistics to get info about one user
     $scope.searchStatistics = function(userid) {
       var result = false;
 
@@ -50,6 +53,7 @@ angular.module('digitaleducatorsApp')
       return result;
     };
 
+    //Get statistics for one user
     if($stateParams.id){
       var uri = '/api/reviews/user/'+$stateParams.id;
       var uri_stat = '/api/reviews/statistics/'+$stateParams.id;
