@@ -14,6 +14,10 @@
 			        <th scope="row">E-mail</th>
 			        <td>{{ oneUser.email }}</td>
 			    </tr>
+			    <tr ng-show="me.role == 'admin">
+			        <th scope="row">Role</th>
+			        <td>{{ oneUser.role }}</td>
+			    </tr>
 			    <tr ng-show="oneUser.location">
 			        <th scope="row">Location</th>
 			        <td>{{ oneUser.location }}</td>

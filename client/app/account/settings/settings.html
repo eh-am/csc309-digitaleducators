@@ -44,10 +44,10 @@
                  mongoose-error/>
         </div>
 
-        <div class="form-group">
+        <div class="form-inline">
           <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Specialist in:</label>
           <span ng-repeat="area in me.areas">
-            <input type="text" ng-model="area.name" ng-blur="addArea($event)" placeholder="Excel, Word, etc" >
+            <input type="text" class="form-control" ng-model="area.name" ng-blur="addArea($event)" placeholder="Excel, Word, etc" >
           </span>
         </div>
 

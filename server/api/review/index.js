@@ -14,6 +14,7 @@ router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 
 router.get('/user/:id', auth.isAuthenticated(), controller.showUserReviews);
+router.get('/statistics/all', auth.isAuthenticated(), controller.showStatistics);
 router.get('/statistics/:id', auth.isAuthenticated(), controller.showUserStatistics);
 
 module.exports = router;

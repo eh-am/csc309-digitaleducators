@@ -17,17 +17,43 @@ angular.module('digitaleducatorsApp')
 	    });
     }
 
+    //Sorting all users
+    $scope.sortKey = 'name';
+    $scope.reverse = false;
+
+    $scope.sort = function(key){
+      $scope.sortKey = key;
+      $scope.reverse = !$scope.reverse;
+    }
+
+    //
     //Stuff for reviews and ratings
+    //
     $scope.isCollapsed = true;
     $scope.myrate = 0;
     $scope.max = 5;
     $scope.me = User.get();
     $scope.errors = {};
 
-    $http.get('/api/users').success(function (users){
-      $scope.users = users;
+    //Get statistics for all users
+    $http.get('/api/reviews/statistics/all').success(function (users_stats){
+      $scope.users_stats = users_stats;
     });
 
+    //Search array of statistics to get info about one user
+    $scope.searchStatistics = function(userid) {
+      var result = false;
+
+      angular.forEach($scope.users_stats, function(oneStat) {
+        if(oneStat._id == userid) {
+          return result = oneStat;
+        }
+      });
+
+      return result;
+    };
+
+    //Get statistics for one user
     if($stateParams.id){
       var uri = '/api/reviews/user/'+$stateParams.id;
       var uri_stat = '/api/reviews/statistics/'+$stateParams.id;
@@ -65,13 +91,13 @@ angular.module('digitaleducatorsApp')
       var r = rating;
       if (isNaN(rating)) r = 0;
 
-        return (new Array(parseInt(r)));
+      return (new Array(parseInt(r)));
     }
 
     $scope.getEmptyStars = function(rating) {
       var r = rating;
       if (isNaN(rating)) r = 0;
 
-        return (new Array(parseInt(5-r)));
+      return (new Array(parseInt(5-r)));
     }
   });

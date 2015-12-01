@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var Review = require('../review/review.model');
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -11,7 +12,6 @@ var validationError = function(res, err) {
 
 /**
  * Get list of users
- * restriction: 'admin'
  */
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
@@ -96,6 +96,51 @@ exports.changeProfileInfo = function(req, res, next) {
     user.description = description;
     user.skype = skype;
     user.areas = areas;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.status(200).send('OK');
+    });
+  });
+};
+
+/**
+ * Edit user info and password
+ * restriction: 'admin'
+ */
+exports.update = function(req, res, next) {
+  var userId = req.body._id;
+  var name = String(req.body.name);
+  var location = String(req.body.location);
+  var description = String(req.body.description);
+  var skype = String(req.body.skype);
+  var areas = req.body.areas;
+  var newPassword = String(req.body.newPassword);
+
+  User.findById(userId, function (err, user) {
+    user.name = name;
+    user.location = location;
+    user.description = description;
+    user.skype = skype;
+    user.areas = areas;
+    if(newPassword)
+      user.password = newPassword;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.status(200).send('OK');
+    });
+  });
+};
+
+/**
+ * Edit user role/privileges
+ * restriction: 'admin'
+ */
+exports.updateRole = function(req, res, next) {
+  var userId = req.body._id;
+  var role = String(req.body.role);
+
+  User.findById(userId, function (err, user) {
+    user.role = role;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.status(200).send('OK');
