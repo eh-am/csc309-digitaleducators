@@ -69,6 +69,11 @@ angular.module('digitaleducatorsApp')
         $http.put('/api/users/'+user._id+'/role', info)
         .then(function (){
           Flash.create('success', 'User role successfully changed.', 'flash-message');
+          angular.forEach($scope.users, function(u, i) {
+            if (u === user) {
+              $scope.users[i].role = result;
+            }
+          });
         })
         .catch(function (){
           Flash.create('danger', 'An error occurred.', 'flash-message');
