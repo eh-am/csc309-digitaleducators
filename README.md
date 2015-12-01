@@ -20,12 +20,24 @@ Then, inside the folder of this project, run
 $ grunt serve
 ```
 
+###formatar
+para funcionar tive que usar mais isso (windows)
+npm install -g 
+grunt npm install -g bower
+bower install
+npm install
+##talvez dê para tirar alguns comandos, depois testo.
+
 And access our page on http://localhost:9000/ !
 
 ##Troubleshooting
 
 If you run into file access/permission problems during the installation, please refer to this guide:
 https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md.
+
+npm install -g grunt npm install -g bower
+bower install
+npm install
 
 # Other stuff
 We are going to use 2 basic users for testing (just for keeping an standard),
