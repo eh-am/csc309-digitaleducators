@@ -1,17 +1,54 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, $uibModal) {
+  .controller('AdminCtrl', function ($scope, $http, $uibModal, Auth, User, Flash) {
+    // Info about admin
     $scope.me = User.get();
     
     // Use the User $resource to fetch all users
     $scope.users = User.query();
 
+    // Edit an user
+    $scope.edit = function(user) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modalEdit.html',
+        controller: 'EditModalCtrl',
+        size: 'lg',
+        resolve: {
+          userinfo: function(){
+            return user;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (result) {
+        var info = {
+          _id: user._id,
+          name: result.name,
+          location: result.location,
+          description: result.description,
+          skype: result.skype,
+          areas: result.areas,
+          newPassword: result.newPassword
+        };
+
+        $http.put('/api/users/'+user._id, info)
+        .then(function (){
+          Flash.create('success', 'User info successfully changed.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
+        });
+      });
+    };
+
+    // Delete an user
     $scope.delete = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
+        templateUrl: 'modalDelete.html',
+        controller: 'DeleteModalCtrl',
         size: 'sm'
       });
 
@@ -26,7 +63,35 @@ angular.module('digitaleducatorsApp')
     };
   });
 
-angular.module('digitaleducatorsApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance) {
+// Controller for edit modal
+angular.module('digitaleducatorsApp').controller('EditModalCtrl', function ($scope, $uibModalInstance, userinfo) {
+  $scope.userinfo = userinfo;
+
+  $scope.editUser = function () {
+    $uibModalInstance.close($scope.userinfo);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
+
+  $scope.addArea = function($event){
+    $event.preventDefault;
+
+    $scope.userinfo.areas = cleanEmptyAreas();
+    $scope.userinfo.areas.push({ name: '' });
+  };
+
+  function cleanEmptyAreas(){
+    return $scope.userinfo.areas.filter(function (area){
+      if (area.name.length <= 0) return false;
+      return true;
+    });
+  }
+});
+
+// Controller for delete modal
+angular.module('digitaleducatorsApp').controller('DeleteModalCtrl', function ($scope, $uibModalInstance) {
   $scope.yes = function () {
     $uibModalInstance.close(true);
   };
