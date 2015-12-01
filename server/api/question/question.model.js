@@ -4,12 +4,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var QuestionSchema = new Schema({
-  title: String,
-  text: String,
+  title: { type: String, required: true },
+  text: { type:String, required: true },
   date: { type: Date, default: Date.now },
   author : {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   // person who helped
   helper : {
