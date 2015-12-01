@@ -12,6 +12,8 @@ var QuestionSchema = new Schema({
     ref: 'User',
     required: true
   },
+
+  
   // person who helped
   helper : {
     type: Schema.Types.ObjectId,
