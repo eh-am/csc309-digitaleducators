@@ -22,8 +22,8 @@ $ grunt serve
 
 ###formatar
 para funcionar tive que usar mais isso (windows)
-npm install -g 
-grunt npm install -g bower
+npm install -g  grunt 
+npm install -g bower
 bower install
 npm install
 ##talvez dê para tirar alguns comandos, depois testo.
