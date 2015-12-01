@@ -104,7 +104,7 @@ exports.changeProfileInfo = function(req, res, next) {
 };
 
 /**
- * Edit user
+ * Edit user info and password
  * restriction: 'admin'
  */
 exports.update = function(req, res, next) {
@@ -124,6 +124,23 @@ exports.update = function(req, res, next) {
     user.areas = areas;
     if(newPassword)
       user.password = newPassword;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.status(200).send('OK');
+    });
+  });
+};
+
+/**
+ * Edit user role/privileges
+ * restriction: 'admin'
+ */
+exports.updateRole = function(req, res, next) {
+  var userId = req.body._id;
+  var role = String(req.body.role);
+
+  User.findById(userId, function (err, user) {
+    user.role = role;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.status(200).send('OK');

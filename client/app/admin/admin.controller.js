@@ -43,6 +43,39 @@ angular.module('digitaleducatorsApp')
       });
     };
 
+    // Switch user privileges
+    $scope.role = function(user) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modalRole.html',
+        controller: 'RoleModalCtrl',
+        size: 'sm',
+        resolve: {
+          newrole: function(){
+            if(user.role == 'admin')
+              return 'user';
+            else
+              return 'admin';
+          }
+        }
+      });
+
+      modalInstance.result.then(function (result) {
+        var info = {
+          _id: user._id,
+          role: result,
+        };
+
+        $http.put('/api/users/'+user._id+'/role', info)
+        .then(function (){
+          Flash.create('success', 'User role successfully changed.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
+        });
+      });
+    };
+
     // Delete an user
     $scope.delete = function(user) {
       var modalInstance = $uibModal.open({
@@ -88,6 +121,19 @@ angular.module('digitaleducatorsApp').controller('EditModalCtrl', function ($sco
       return true;
     });
   }
+});
+
+// Controller for role/privileges modal
+angular.module('digitaleducatorsApp').controller('RoleModalCtrl', function ($scope, $uibModalInstance, newrole) {
+  $scope.newrole = newrole;
+
+  $scope.yes = function () {
+    $uibModalInstance.close($scope.newrole);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
 });
 
 // Controller for delete modal
