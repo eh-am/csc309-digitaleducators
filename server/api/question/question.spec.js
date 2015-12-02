@@ -102,11 +102,14 @@ describe('Question Model', function() {
 
 
   it('should save successfully', function(done) {
-    question.helper = helper;
-    question.author = author;
+    question.helper = helper._id;
+    question.author = author._id;
 
     question.save(function(err) {
-      should.not.exist(err);
+      Question.find({}, function(err, questions){
+        questions.should.have.length(1);
+      });
+      
       done();
     });
   });
