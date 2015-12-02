@@ -11,9 +11,9 @@
     </div>
     <div uib-collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+<!--         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
+        </li> -->
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/users')}"><a href="/users">Users</a></li>
     <li ng-show="isLoggedIn()" uib-dropdown is-open="status.isopen">
@@ -23,11 +23,11 @@
       <ul  class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
         <li role="menuitem"><a href="/myquestions">My questions</a></li>
         <li role="menuitem"><a href="/myhelps">My helps</a></li>
-        <li class="divider"></li>
-        <li role="menuitem"><a href="/createquestions"><span class="btn btn-primary">Ask for help!</span></a></li>
+        <li class="divider"></li>        
       </ul>
     </li>
-    <li role="menuitem" ng-show="isLoggedIn()"><a href="/questions" class="btn btn-sm btn-default">Help someone!</a></li>
+    <li role="menuitem"><a href="/createquestions">Ask for help!</a></li>
+    <li role="menuitem" ng-show="isLoggedIn()"><a href="/questions">Help someone!</a></li>
     <li ng-class="{active: isActive('/faq')}"><a href="/faq">FAQ</a></li>
 
 
