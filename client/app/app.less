@@ -23,6 +23,24 @@
     right: 0 !important;
 }
 
+/* NAVBAR */
+@navbar-default-bg : #3a80c3;
+@navbar-default-color: #fff;
+@navbar-default-link-color: #fff;
+@navbar-default-link-hover-color: #DCDCDC;
+@navbar-default-link-active-color: #fff;
+.navbar .dropdown-menu, .navbar-default .navbar-toggle .icon-bar{
+  background: @navbar-default-bg;
+}
+.navbar .dropdown-menu > li > a{
+  color: @navbar-default-link-color;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+  background-color: @navbar-default-link-active-bg;
+}
+
+// @brand-primary:         #3980c3;
+
 // injector
 @import 'account/login/login.less';
 @import 'admin/admin.less';
