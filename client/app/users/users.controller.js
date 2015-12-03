@@ -29,7 +29,6 @@ angular.module('digitaleducatorsApp')
     //
     //Stuff for reviews and ratings
     //
-    $scope.isCollapsed = true;
     $scope.myrate = 0;
     $scope.max = 5;
     $scope.me = User.get();
@@ -80,7 +79,15 @@ angular.module('digitaleducatorsApp')
       }).then(function successCallback(response) {
         $scope.reviewmessage = 'Review created!';
         $scope.errors.myreview = '';
+        $scope.myrate = 0;
+        $scope.myreview = '';
 
+        var newreview = response.data;
+        newreview.reviewer = {
+          _id: $scope.me._id,
+          name: $scope.me.name
+        };
+        
         $scope.reviews.unshift(response.data);
         //$state.reload();
       }, function errorCallback(response) {
