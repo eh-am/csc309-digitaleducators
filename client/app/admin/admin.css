@@ -7,3 +7,5 @@
 .manageoptions a { cursor: pointer; }
 
 .admintab { padding-top: 0.5em; }
+
+#searchreviews, #searchquestions { margin: 1em 0em; }

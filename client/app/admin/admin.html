@@ -8,28 +8,42 @@
 	<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
 		<uib-tabset>
 		    <uib-tab heading="All Users">
-		    	<ul class="list-group admintab">
-				    <li class="list-group-item" ng-repeat="user in users">
-				    	<div class="row">
-				    		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
-						        <strong>{{ user.name }}</strong><br>
-						        <span class="text-muted">{{ user.email }}</span>
-						    </div>
+		    	<div class="admintab">
+			    	<form id="searchusers" class="form-inline">
+				        <div class="form-group">
+				            <label>Search for users: </label>
+				            <input type="text" class="form-control" ng-model="searchUsers" placeholder="Name, areas...">
+				        </div>
+				    </form>
+			    	<ul class="list-group">
+					    <li class="list-group-item" ng-repeat="user in users | filter:searchUsers">
+					    	<div class="row">
+					    		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+							        <strong>{{ user.name }}</strong><br>
+							        <span class="text-muted">{{ user.email }}</span>
+							    </div>
 
-					        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 controlbuttons">
-						        <a href="{{ '/users/'+user._id }}" target="_blank"><span class="glyphicon glyphicon-user"></span></a>
-						        <a ng-click="editUser(user)"><span class="glyphicon glyphicon-pencil"></span></a>
-						        <a ng-click="editRole(user)"><span class="glyphicon" ng-hide="me._id == user._id" ng-class="{'glyphicon glyphicon-eye-open':(user.role!='admin'),'glyphicon glyphicon-eye-close':(user.role=='admin')}"></span></a>
-						        <a ng-hide="me._id == user._id" ng-click="deleteUser(user)" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+						        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 controlbuttons">
+							        <a href="{{ '/users/'+user._id }}" target="_blank"><span class="glyphicon glyphicon-user"></span></a>
+							        <a ng-click="editUser(user)"><span class="glyphicon glyphicon-pencil"></span></a>
+							        <a ng-click="editRole(user)"><span class="glyphicon" ng-hide="me._id == user._id" ng-class="{'glyphicon glyphicon-eye-open':(user.role!='admin'),'glyphicon glyphicon-eye-close':(user.role=='admin')}"></span></a>
+							        <a ng-hide="me._id == user._id" ng-click="deleteUser(user)" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+						    	</div>
 					    	</div>
-				    	</div>
-				    </li>
-			  	</ul>
+					    </li>
+				  	</ul>
+				  </div>
 			</uib-tab>
 
 		    <uib-tab heading="Manage Reviews">
 		    	<div class="admintab">
-			    	<div class="panel panel-info" ng-repeat="review in reviews">
+		    		<form id="searchreviews" class="form-inline">
+				        <div class="form-group">
+				            <label>Search for reviews: </label>
+				            <input type="text" class="form-control" ng-model="searchReviews" placeholder="Names, content...">
+				        </div>
+				    </form>
+			    	<div class="panel panel-info" ng-repeat="review in reviews | filter:searchReviews">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">Rating: <span class="glyphicon glyphicon-star" ng-repeat="star in getStars(review.rating) track by $index"></span><span class="glyphicon glyphicon-star-empty" ng-repeat="emptyStar in getEmptyStars(review.rating) track by $index"></span>
 						</h3>
@@ -52,7 +66,13 @@
 
 			<uib-tab heading="Manage Questions">
 				<div class="admintab">
-					<div ng-repeat="question in questions">
+					<form id="searchquestions" class="form-inline">
+				        <div class="form-group">
+				            <label>Search for questions: </label>
+				            <input type="text" class="form-control" ng-model="searchQuestions" placeholder="Areas, authors...">
+				        </div>
+				    </form>
+					<div ng-repeat="question in questions | filter:searchQuestions">
 				        <div class="question panel panel-default panel-primary">      
 				          <div class="panel-heading">
 				            <a href="questions/{{ question._id }}">{{ question.title }} by {{ question.author.name }}</a>
