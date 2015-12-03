@@ -5,7 +5,7 @@ angular.module('digitaleducatorsApp')
     $stateProvider
       .state('myquestions', {
         url: '/myquestions',
-        templateUrl: 'app/myquestions/myquestions.html',
+        templateUrl: 'app/myquestions/myQuestions.html',
         controller: 'MyquestionsCtrl'
       });
   });
