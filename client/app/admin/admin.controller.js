@@ -23,7 +23,7 @@ angular.module('digitaleducatorsApp')
     $scope.editUser = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modalEdit.html',
+        templateUrl: 'app/admin/modal/modalEditUser.html',
         controller: 'EditModalCtrl',
         size: 'lg',
         resolve: {
@@ -58,7 +58,7 @@ angular.module('digitaleducatorsApp')
     $scope.editRole = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modalRole.html',
+        templateUrl: 'app/admin/modal/modalEditRole.html',
         controller: 'RoleModalCtrl',
         size: 'sm',
         resolve: {
@@ -96,7 +96,7 @@ angular.module('digitaleducatorsApp')
     $scope.deleteUser = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modalDelete.html',
+        templateUrl: 'app/admin/modal/modalDeleteUser.html',
         controller: 'DeleteModalCtrl',
         size: 'sm'
       });
@@ -115,7 +115,7 @@ angular.module('digitaleducatorsApp')
     $scope.deleteReview = function(review) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modalDeleteReview.html',
+        templateUrl: 'app/admin/modal/modalDeleteReview.html',
         controller: 'DeleteReviewModalCtrl',
         size: 'sm'
       });
@@ -140,7 +140,7 @@ angular.module('digitaleducatorsApp')
     $scope.deleteQuestion = function(question) {
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'modalDeleteQuestion.html',
+        templateUrl: 'app/admin/modal/modalDeleteQuestion.html',
         controller: 'DeleteQuestionModalCtrl',
         size: 'sm'
       });
