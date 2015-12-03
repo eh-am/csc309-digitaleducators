@@ -126,7 +126,7 @@ exports.update = function(req, res, next) {
       user.password = newPassword;
     user.save(function(err) {
       if (err) return validationError(res, err);
-      res.status(200).send('OK');
+      res.status(200).send(user.profileadmin);
     });
   });
 };

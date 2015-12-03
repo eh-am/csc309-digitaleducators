@@ -22,7 +22,7 @@ router.post('/myHelps', auth.isAuthenticated(), controller.myHelps);
 
 // TODO
 // uncomment to be able to update questions
-// router.put('/:id', auth.isAuthenticated(), controller.update);
+router.put('/:id', auth.isAuthenticated(), controller.update);
 // router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 

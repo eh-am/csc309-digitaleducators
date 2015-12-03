@@ -78,6 +78,24 @@ UserSchema
     };
   });
 
+// Profile information for admins
+UserSchema
+  .virtual('profileadmin')
+  .get(function() {
+    return {
+      '_id': this._id,
+      'name': this.name,
+      'email': this.email,
+      'location': this.location,
+      'description': this.description,
+      'skype': this.skype,
+      'areas': this.areas,
+      'role': this.role,
+      'balance': this.balance,
+      'provider': this.provider
+    };
+  });
+
 // Non-sensitive info we'll be putting in the token
 UserSchema
   .virtual('token')
