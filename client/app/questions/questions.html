@@ -4,10 +4,22 @@
       <h1>Questions</h1>
     </div>
         
+    <div class="row">
+      <div class="col-xs-12">
+        <form id="searchQuestions" class="form-inline">
+            <div class="form-group">
+                <label>Search for areas: </label>
+                <input type="text" class="form-control"
+                 placeholder="Areas..." ng-model="searchAreas" uib-popover="We have input your areas of expertise by default!" popover-trigger="mouseenter" >
+                 <button class="btn btn-primary" ng-click="showAll()">Show all questions</button>
+                 <button class="btn btn-default" uib-popover="Show only the questions you are a specialist!" popover-trigger="mouseenter" ng-click="addSpecialties()">Restore my Specialties</button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <br /><br />
 
-
-
-    <div ng-repeat="question in questions">
+    <div ng-repeat="question in questions | filter:filterAreas ">
       <div class="row">
         <div class="question panel panel-default panel-primary">      
           <div class="panel-heading">
