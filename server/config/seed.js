@@ -44,7 +44,7 @@ User.find({}).remove(function() {
       //   });
       // });
 
-      });
+      // });
     }
   );
 });
