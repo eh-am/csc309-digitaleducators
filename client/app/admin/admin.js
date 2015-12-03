@@ -6,6 +6,14 @@ angular.module('digitaleducatorsApp')
       .state('admin', {
         url: '/admin',
         templateUrl: 'app/admin/admin.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminCtrl',
+        resolve: {
+          // redirect to home if is not an admin
+          isAdmin: function(Auth, $location){
+            if (!Auth.isAdmin()){
+               $location.path('/');
+            }
+          }
+        }
       });
   });
