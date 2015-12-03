@@ -4,6 +4,7 @@ angular.module('digitaleducatorsApp')
   .controller('AdminCtrl', function ($scope, $http, $uibModal, Auth, User, Flash) {
     // Info about admin
     $scope.me = User.get();
+    console.log(Auth);
     
     // Use the User $resource to fetch all users
     $scope.users = User.query();
