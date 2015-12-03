@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edit Question</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+		<form name="questionform">
+
+	      <div class="form-group">
+	        <label for="">What is your problem?</label>
+	        <input type="text" class="form-control" ng-model="questioninfo.title" placeholder="eg. How to download a youtube video?" required>
+	      </div>
+
+	      <div class="form-group">  
+	        <label for="">Explain your problem/question</label>
+	        <textarea type="text" class="form-control" ng-model="questioninfo.text" placeholder="I've been trying to download a specific youtube video for a certain time, but I can't..." required></textarea>
+	      </div>
+
+	      <div class="form-group">
+	        <label for=""><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Tags:</label>
+	        <span ng-repeat="tag in questioninfo.tags">
+	          <input type="text" ng-model="tag.name" ng-blur="addTag($event)" placeholder="Excel, Word, etc" >
+	        </span>
+	      </div>
+	    </form>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="submit" ng-click="editQuestion(questionform)">Save changes</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

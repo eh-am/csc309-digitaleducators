@@ -181,6 +181,37 @@ angular.module('digitaleducatorsApp')
       });
     };
 
+    // Edit a question
+    $scope.editQuestion = function(question) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/admin/modal/modalEditQuestion.html',
+        controller: 'EditQuestionModalCtrl',
+        size: 'lg',
+        resolve: {
+          questioninfo: function(){
+            return angular.copy(question);
+          }
+        }
+      });
+
+      modalInstance.result.then(function (result) {
+        var info = {
+          title: result.title,
+          text: result.text,
+          tags: result.tags
+        };
+
+        $http.put('/api/questions/'+question._id, info)
+        .then(function (){
+          Flash.create('success', 'Question successfully changed.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
+        });
+      });
+    };
+
     // Delete a question
     $scope.deleteQuestion = function(question) {
       var modalInstance = $uibModal.open({
@@ -285,6 +316,46 @@ angular.module('digitaleducatorsApp').controller('DeleteReviewModalCtrl', functi
   $scope.cancel = function () {
     $uibModalInstance.dismiss('Cancel');
   };
+});
+
+// Controller for question edit modal
+angular.module('digitaleducatorsApp').controller('EditQuestionModalCtrl', function ($scope, $uibModalInstance, questioninfo) {
+  $scope.questioninfo = questioninfo;
+  var tags = [ ];
+
+  angular.forEach(questioninfo.tags, function(tag, i) {
+    tags.push({ name: tag });
+  });
+
+  tags.push({ name: '' });
+  $scope.questioninfo.tags = tags;
+
+  $scope.editQuestion = function () {
+    var tagsArray = [];
+    cleanEmptyTags().map(function(value){
+      tagsArray.push(value.name);
+    });
+    $scope.questioninfo.tags = tagsArray;
+    $uibModalInstance.close($scope.questioninfo);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
+
+  $scope.addTag = function($event){
+    $event.preventDefault;
+
+    $scope.questioninfo.tags = cleanEmptyTags();
+    $scope.questioninfo.tags.push({ name: '' });
+  };
+
+  function cleanEmptyTags(){
+    return $scope.questioninfo.tags.filter(function (tag){
+      if (tag.name.length <= 0) return false;
+      return true;
+    });
+  }
 });
 
 // Controller for question delete modal
