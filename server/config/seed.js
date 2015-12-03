@@ -32,6 +32,9 @@ User.find({}).remove(function() {
 
 
       console.log('finished populating users');
+      Question.find({}).remove(function(){
+        console.log("removed all questions");
+      });
 
       // console.log("creating one question");
       // User.findOne({'email': 'admin@admin.com'}, function(err, obj){

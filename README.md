@@ -60,3 +60,11 @@ this generator can be found here:
 http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/.
 Keep the generator-angular-fullstack documentation in hand as well:
 https://github.com/DaftMonk/generator-angular-fullstack/blob/master/readme.md
+
+
+#Deploy
+```
+grunt build
+
+grunt buildcontrol:heroku
+```

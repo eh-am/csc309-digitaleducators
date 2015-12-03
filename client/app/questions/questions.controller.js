@@ -16,10 +16,11 @@ console.log($scope.currentUser);
     $http.get('/api/questions/getOpenQuestions').success(function (questions){
       $scope.questions = questions;
       $scope.addSpecialties();   
-      console.log(questions)
     });
 
     $scope.filterAreas = function(question){
+      // if there's no question, do nothing
+      if (!question){ return false; }
       // a user can't see his own question
       if ($scope.currentUser._id == question.author._id){ return false; }
 
@@ -60,6 +61,20 @@ console.log($scope.currentUser);
       return false;
     }
 
+    // if user already has applied to help
+    // don't show the "apply to help" button
+    $scope.hasAlreadyAppliedToHelp = function(question){
+      var _id = $scope.$parent.getCurrentUser()._id;
+      var match = false;
+      question.applicants.forEach(function (applicant){
+        if (_id == applicant._id){
+          match = true;
+        }
+      });
+
+      return match;
+    };
+
     $scope.applyForHelp = function(questionId){            
       var modal = $uibModal.open({
         modal:{
@@ -84,6 +99,7 @@ console.log($scope.currentUser);
               questionId : questionId,
               price: $scope.price
             }).success(function (data, status){
+              console.log(data);
               Flash.create('success', "You applied successfully to help this person", 'flash-message');         
             });
             
