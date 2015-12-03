@@ -1,25 +1,43 @@
 #1 ) Unauthorized Access to admin functions
-Without an identification system that restricts access to certain features to specific users, anyone would be able to access the admin page “/admin” and perform administration functions (such as deleting other users) freely.
+Without an identification system that restricts access to certain features to specific users,
+ anyone would be able to access the admin page “/admin” and perform administration functions 
+ (such as deleting other users) freely.
 
-To prevent this issue we implemented an authentication system that attributes ‘roles’ to users, each of which attributes only the necessary permissions to each user. One such role is ‘admin’ that allows its users to perform administration functions.
+To prevent this issue we implemented an authentication system that attributes ‘roles’ to users,
+ each of which attributes only the necessary permissions to each user. One such role is ‘admin’
+ that allows its users to perform administration functions.
 
-The authentication system, which also supports social login, was implemented through the use of different packages and frameworks:
+The authentication system, which also supports social login, was implemented through the use of
+ different packages and frameworks:
 - Passport: an authentication middleware for Node.js
-- Crypto : encapsulates secure credentials to be transferred through http(s). Generates unique hash for each user, preventing rainbow table attacks.
+- Crypto : encapsulates secure credentials to be transferred through http(s). Generates unique 
+hash for each user, preventing rainbow table attacks.
 - Express-jwt and jsonwebtoken: implements tokens as part of authentication.
 
-Testing: testing was quite straightforward: we attempted to use admin restricted resources (such as entering the adminstration page “/admin”) while logged as an a regular user (or not logged in), as well as accessing pages restricted to registered users only(such as “http://localhost:9000/questions”) without logging in.
+Testing: testing was quite straightforward: we attempted to use admin restricted resources
+ (such as entering the adminstration page “/admin”) while logged as an a regular user (or not 
+ logged in), as well as accessing pages restricted to registered users only(such as 
+ “http://localhost:9000/questions”) without logging in.
 
 
 #2) Cross-Site Request Forgery (CSRF)
-As described in class, CSRF is a type of attack that allows a malicious website containing links or javascript to execute a request on our website on behalf of the logged in user who visits the malicious website.
+As described in class, CSRF is a type of attack that allows a malicious website containing
+ links or javascript to execute a request on our website on behalf of the logged in user who
+ visits the malicious website.
 
-To prevent this vulnerability we use JSON Web Tokens (JWT) as an additional layer of security in our authentication system. JWTs are a compact and URL-safe JSON object, which is cryptographically signed to verify an user’s authenticity.
+To prevent this vulnerability we use JSON Web Tokens (JWT) as an additional layer of security 
+in our authentication system. JWTs are a compact and URL-safe JSON object, which is 
+cryptographically signed to verify an user’s authenticity.
 
-This functionality was implemented through the use of the jsonwebtoken and express-jwt packages along with our authentication system.
+This functionality was implemented through the use of the jsonwebtoken and express-jwt packages
+ along with our authentication system.
 
-Testing: to test against this vulnerability we performed a CSRF ourselves by creating a simple webpage (“/Report/attackTest.html”) that uses a simple ajax script to attempt to create a false question on the user’s behalf via a POST.
+Testing: to test against this vulnerability we performed a CSRF ourselves by creating a simple
+ webpage (“/Report/attackTest.html”) that uses a simple ajax script to attempt to create a 
+ false question on the user’s behalf via a POST.
 
-By monitoring the browser Network logger when using that page and clicking the button that generates the attack we can verify that the server responds with “401”, while on the server console it logs
+By monitoring the browser Network logger when using that page and clicking the button that 
+generates the attack we can verify that the server responds with “401”, while on the server
+ console it logs
 “UnauthorizedError: No authorization token was found
         at middleware (…)”
