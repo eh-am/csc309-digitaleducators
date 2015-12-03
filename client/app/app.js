@@ -8,7 +8,8 @@ angular.module('digitaleducatorsApp', [
   'ui.router',
   'ui.bootstrap',
   'flash',
-  'ngAnimate'
+  'ngAnimate',
+  'validation.match'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
