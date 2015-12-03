@@ -5,7 +5,7 @@ angular.module('digitaleducatorsApp')
     $stateProvider
       .state('myHelps', {
         url: '/myhelps',
-        templateUrl: 'app/myHelps/myHelps.html',
+        templateUrl: 'app/myHelps/myhelps.html',
         controller: 'MyHelpsCtrl'
       });
   });
