@@ -7,10 +7,15 @@ var User = require('../user/user.model');
 
 // Get list of reviews
 exports.index = function(req, res) {
-  Review.find(function (err, reviews) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(reviews);
-  });
+  Review
+    .find({})
+    .populate('user', 'name')
+    .populate('reviewer', 'name')
+    .sort('-date')
+    .exec(function(err, reviews){
+      if(err) { console.log(err); return handleError(res, err); }
+      return res.status(200).json(reviews);
+    });
 };
 
 // Get a single review

@@ -54,7 +54,7 @@
 					  </div>
 
 					  <div class="panel-footer">
-					  	Reviewed by <a href="{{ '/users/'+review.reviewer._id }}">{{ review.reviewer.name }}</a> on {{ review.date | date:'medium' }}
+					  	<a href="{{ '/users/'+review.user._id }}">{{ review.user.name }}</a> was reviewed by <a href="{{ '/users/'+review.reviewer._id }}">{{ review.reviewer.name }}</a> on {{ review.date | date:'medium' }}
 					  	<div class="controlbuttons controlreview">
 					    	<a ng-click="editReview(review)"><span class="glyphicon glyphicon-pencil"></span></a>
 							<a ng-click="deleteReview(review)"><span class="glyphicon glyphicon-trash"></span></a>

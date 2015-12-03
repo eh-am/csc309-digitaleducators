@@ -12,6 +12,7 @@ angular.module('digitaleducatorsApp')
     // Get reviews
     $http.get('/api/reviews/').success(function (reviews){
       $scope.reviews = reviews;
+      console.log(reviews);
     });
 
     $scope.getStars = function(rating) {
