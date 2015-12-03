@@ -42,9 +42,9 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
 			<h2>Reviews and Ratings for {{ oneUser.name }}</h2>
-			<p>Would you like to <a role="button" href="#reviewUser" ng-click="isCollapsed = !isCollapsed">review or recommend {{ oneUser.name }}</a>?</p>
+			<p>Would you like to review or recommend {{ oneUser.name }}?</p>
 
-			<div id="reviewUser" class="panel panel-default" uib-collapse="isCollapsed">
+			<div id="reviewUser" class="panel panel-default">
 				<div class="panel-body">
 				  <form class="form" name="reviewform" ng-show="(oneUser._id != me._id)" ng-submit="reviewUser(reviewform)" novalidate>
 
