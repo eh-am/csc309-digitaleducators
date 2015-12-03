@@ -14,7 +14,7 @@
 			        <th scope="row">E-mail</th>
 			        <td>{{ oneUser.email }}</td>
 			    </tr>
-			    <tr ng-show="me.role == 'admin">
+			    <tr ng-if="me.role == 'admin">
 			        <th scope="row">Role</th>
 			        <td>{{ oneUser.role }}</td>
 			    </tr>
@@ -99,12 +99,21 @@
 
 			<div class="panel panel-info" ng-repeat="oneReview in reviews">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Rating: <span class="glyphicon glyphicon-star" ng-repeat="star in getStars(oneReview.rating) track by $index"></span><span class="glyphicon glyphicon-star-empty" ng-repeat="emptyStar in getEmptyStars(oneReview.rating) track by $index"></span></h3>
+			    <h3 class="panel-title">Rating: <span class="glyphicon glyphicon-star" ng-repeat="star in getStars(oneReview.rating) track by $index"></span><span class="glyphicon glyphicon-star-empty" ng-repeat="emptyStar in getEmptyStars(oneReview.rating) track by $index"></span>
+				</h3>
 			  </div>
+
 			  <div class="panel-body">
 			    {{ oneReview.review }}
 			  </div>
-			  <div class="panel-footer">Reviewed by <a href="{{ '/users/'+oneReview.reviewer._id }}">{{ oneReview.reviewer.name }}</a> on {{ oneReview.date | date:'medium' }}</div>
+
+			  <div class="panel-footer">
+			  	Reviewed by <a href="{{ '/users/'+oneReview.reviewer._id }}">{{ oneReview.reviewer.name }}</a> on {{ oneReview.date | date:'medium' }}
+			  	<div ng-if="me.role == 'admin'" class="controlbuttons controlreview">
+			    	<a href="{{ '/reviews/'+oneReview._id }}"><span class="glyphicon glyphicon-pencil"></span></a>
+					<a href="{{ '/reviews/'+oneReview._id }}"><span class="glyphicon glyphicon-trash"></span></a>
+				</div>
+			  </div>
 			</div>
 		</div>
 
