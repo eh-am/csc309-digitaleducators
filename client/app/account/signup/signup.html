@@ -50,8 +50,17 @@
           <p class="help-block" ng-show="form.password.$error.mongoose">
             {{ errors.password }}
           </p>
-        </div>
 
+        </br>
+          <label>Confirm Password</label>
+           <input type="password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword"  
+              match="user.password" 
+              ng-minlength="3" 
+              required/>
+
+          <p ng-show = "form.confirmPassword.$error.match && submitted">Passwords do not match! </p>
+        </div>
+        </br>
         <div>
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
             Sign up
