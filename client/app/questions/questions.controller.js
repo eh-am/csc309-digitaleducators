@@ -67,11 +67,12 @@ console.log($scope.currentUser);
       var _id = $scope.$parent.getCurrentUser()._id;
       var match = false;
       question.applicants.forEach(function (applicant){
-        if (_id == applicant._id){
+        if (_id == applicant.user._id){
           match = true;
         }
       });
 
+      console.log("retornando " + match)
       return match;
     };
 
