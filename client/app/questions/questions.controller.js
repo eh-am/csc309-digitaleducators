@@ -6,7 +6,7 @@ angular.module('digitaleducatorsApp')
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
     $scope.currentUser = Auth.getCurrentUser();
-
+console.log($scope.currentUser);
 
 
     
@@ -16,6 +16,7 @@ angular.module('digitaleducatorsApp')
     $http.get('/api/questions/getOpenQuestions').success(function (questions){
       $scope.questions = questions;
       $scope.addSpecialties();   
+      console.log(questions)
     });
 
     $scope.filterAreas = function(question){
@@ -49,6 +50,15 @@ angular.module('digitaleducatorsApp')
     }
 
 
+    // checks if the person is owner of the question
+    // a user can't respond his/hers own question
+    $scope.isOwner = function(question){
+      if ($scope.$parent.getCurrentUser()._id == question.author._id){
+        return true;
+      }
+      
+      return false;
+    }
 
     $scope.applyForHelp = function(questionId){            
       var modal = $uibModal.open({
@@ -84,53 +94,5 @@ angular.module('digitaleducatorsApp')
       });
     };
 
-
-    $scope.addQuestion = function(){
-      var tagsArray = [];
-      cleanEmptyTags().map(function(value){
-        tagsArray.push(value.name);
-      });
-
-      $http.post('/api/questions', {
-        title: $scope.title,
-        text: $scope.newQuestion,
-        tags: tagsArray
-      });
-      $scope.newQuestion = "";
-      $scope.tags = [{ name: '' }];
-
-
-      $location.path('/myquestions');
-      Flash.create('success', "You asked for help successfully.", 'flash-message');
-      //TODO
-      //redirect to the question
-    };
-
-    $scope.addTag = function($event){
-      $event.preventDefault;
-
-      $scope.tags = cleanEmptyTags();
-      $scope.tags.push({
-        name: ''
-      });
-
-    };
-
-    // checks if the person is owner of the question
-    // a user can't respond his/hers own question
-    $scope.isOwner = function(question){
-      if ($scope.$parent.getCurrentUser()._id == question.author._id){
-        return true;
-      }
-      
-      return false;
-    }
-
-    function cleanEmptyTags(){
-      return $scope.tags.filter(function (tag){
-        if (tag.name.length <= 0) return false;
-        return true;
-      });
-    }
 
   });
