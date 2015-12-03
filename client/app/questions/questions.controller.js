@@ -2,13 +2,10 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal, Flash, Auth) {
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal, Flash, Auth, applyForHelpService) {
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
     $scope.currentUser = Auth.getCurrentUser();
-console.log($scope.currentUser);
-
-
     
 
 
@@ -72,42 +69,19 @@ console.log($scope.currentUser);
         }
       });
 
-      console.log("retornando " + match)
       return match;
     };
 
-    $scope.applyForHelp = function(questionId){            
+    $scope.applyForHelp = function(question){            
+      
+      applyForHelpService.setQuestion(question);
+
       var modal = $uibModal.open({
         modal:{
           dismissable: true, 
         },        
-        templateUrl: 'app/questions/modal/applyModal.html',
-        controller: function applyController($scope, $uibModalInstance){
-
-          //TODO: change for real values
-          $scope.maxCoins = 10;
-          $scope.minCoins = 1;
-
-
-          // the default price
-          $scope.price = parseInt(($scope.maxCoins + $scope.minCoins) / 2);
-
-          $scope.submit = function($event){
-            $event.preventDefault();
-            $uibModalInstance.dismiss();
-
-            $http.post('/api/questions/applyForHelp', {
-              questionId : questionId,
-              price: $scope.price
-            }).success(function (data, status){
-              console.log(data);
-              Flash.create('success', "You applied successfully to help this person", 'flash-message');         
-            });
-            
-            //TODO
-            //apply for help
-          };
-        },
+        templateUrl: 'app/questions/applymodal.html',
+        controller: 'ApplyForHelpCtrl'
       });
     };
 
