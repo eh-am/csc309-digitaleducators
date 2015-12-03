@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, $window, Flash) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,8 +15,9 @@ angular.module('digitaleducatorsApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
+          // Account created, redirect to home             
+          $location.path('/');          
+      
         })
         .catch( function(err) {
           err = err.data;

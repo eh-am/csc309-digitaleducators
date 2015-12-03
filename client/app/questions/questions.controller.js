@@ -2,15 +2,53 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal, Flash) {
+  .controller('QuestionsCtrl', function ($scope, $http, $location, socket, $uibModal, Flash, Auth) {
     $scope.newQuestion = '';
     $scope.tags = [{ name: '' }];
+    $scope.currentUser = Auth.getCurrentUser();
+
+
+
+    
+
+
 
     $http.get('/api/questions/getOpenQuestions').success(function (questions){
-      $scope.questions = questions;   
-      console.log(questions);
-      console.log(questions.length);
+      $scope.questions = questions;
+      $scope.addSpecialties();   
     });
+
+    $scope.filterAreas = function(question){
+      // a user can't see his own question
+      if ($scope.currentUser._id == question.author._id){ return false; }
+
+
+      if ($scope.searchAreas === "") return true;
+      var isMatch = false;
+
+      var parts = $scope.searchAreas.split(' ');
+
+      parts.forEach(function(part){
+        if (new RegExp(part.toUpperCase()).test(question.tags.join("").toUpperCase())){
+          isMatch = true;
+        };
+
+      });
+
+      return isMatch;
+    };
+
+    $scope.showAll = function(){
+      $scope.searchAreas = "";
+    }
+
+    $scope.addSpecialties = function(){
+      $scope.searchAreas = Auth.getCurrentUser().areas.filter(function(area){ return area.name == "" ? false : true}).map(function (area){
+        return area.name;
+      }).join(" ");
+    }
+
+
 
     $scope.applyForHelp = function(questionId){            
       var modal = $uibModal.open({

@@ -56,7 +56,8 @@ angular.module('digitaleducatorsApp')
               $uibModalInstance.dismiss();
               loadQuestions();
 
-              Flash.create('success', "You ended your help session successfully.", 'flash-message');
+              Flash.create('success', "You ended your help session successfully." + 
+                "<a href='/users/"+ question.helper._id + "'>How about revewing this person?</a> ", 'flash-message');
             });
             
           }
