@@ -80,6 +80,7 @@
               <div ng-show="question.status == 'closed'">                
                 <div>
                 Was helped by: <a href="/users/{{question.helper._id}}">{{ question.helper.name }}</a> for the value of {{ question.price }} coffee coins. <a href="/inbox/{{question._id}}" class="btn btn-primary">Talk to this person</a>
+                <a href="/users/{{question.helper._id}}" class="btn btn-primary">Review this person</a>
                 </div>
               </div>
 
