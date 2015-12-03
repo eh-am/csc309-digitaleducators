@@ -81,7 +81,8 @@ angular.module('digitaleducatorsApp')
         $scope.reviewmessage = 'Review created!';
         $scope.errors.myreview = '';
 
-        $state.reload();
+        $scope.reviews.unshift(response.data);
+        //$state.reload();
       }, function errorCallback(response) {
         $scope.errors.myreview = 'An error occurred.';
       });
