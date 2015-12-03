@@ -59,7 +59,12 @@ angular.module('digitaleducatorsApp')
         };
 
         $http.put('/api/users/'+user._id, info)
-        .then(function (){
+        .then(function (response){
+          angular.forEach($scope.users, function(u, i) {
+            if (u === user) {
+              $scope.users[i] = response.data;
+            }
+          });
           Flash.create('success', 'User info successfully changed.', 'flash-message');
         })
         .catch(function (){
@@ -93,12 +98,12 @@ angular.module('digitaleducatorsApp')
 
         $http.put('/api/users/'+user._id+'/role', info)
         .then(function (){
-          Flash.create('success', 'User role successfully changed.', 'flash-message');
           angular.forEach($scope.users, function(u, i) {
             if (u === user) {
               $scope.users[i].role = result;
             }
           });
+          Flash.create('success', 'User role successfully changed.', 'flash-message');
         })
         .catch(function (){
           Flash.create('danger', 'An error occurred.', 'flash-message');
@@ -147,7 +152,12 @@ angular.module('digitaleducatorsApp')
         };
 
         $http.put('/api/reviews/'+review._id, info)
-        .then(function (){
+        .then(function (response){
+          angular.forEach($scope.reviews, function(r, i) {
+            if (r === review) {
+              $scope.reviews[i] = response.data;
+            }
+          });
           Flash.create('success', 'Review successfully changed.', 'flash-message');
         })
         .catch(function (){
@@ -203,7 +213,12 @@ angular.module('digitaleducatorsApp')
         };
 
         $http.put('/api/questions/'+question._id, info)
-        .then(function (){
+        .then(function (response){
+          angular.forEach($scope.questions, function(q, i) {
+            if (q === question) {
+              $scope.questions[i] = response.data;
+            }
+          });
           Flash.create('success', 'Question successfully changed.', 'flash-message');
         })
         .catch(function (){
