@@ -2,15 +2,25 @@
 
 angular.module('digitaleducatorsApp')
   .controller('AdminCtrl', function ($scope, $http, $uibModal, Auth, User, Flash) {
+
     // Info about admin
     $scope.me = User.get();
-    console.log(Auth);
     
     // Use the User $resource to fetch all users
     $scope.users = User.query();
 
+    // Get reviews
+    $http.get('/api/reviews/').success(function (reviews){
+      $scope.reviews = reviews;
+    });
+
+    // Get questions
+    $http.get('/api/questions/').success(function (questions){
+      $scope.questions = questions;
+    });
+
     // Edit an user
-    $scope.edit = function(user) {
+    $scope.editUser = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalEdit.html',
@@ -45,7 +55,7 @@ angular.module('digitaleducatorsApp')
     };
 
     // Switch user privileges
-    $scope.role = function(user) {
+    $scope.editRole = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalRole.html',
@@ -83,7 +93,7 @@ angular.module('digitaleducatorsApp')
     };
 
     // Delete an user
-    $scope.delete = function(user) {
+    $scope.deleteUser = function(user) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalDelete.html',
@@ -100,9 +110,59 @@ angular.module('digitaleducatorsApp')
         });
       });
     };
+
+    // Delete a review
+    $scope.deleteReview = function(review) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modalDeleteReview.html',
+        controller: 'DeleteReviewModalCtrl',
+        size: 'sm'
+      });
+
+      modalInstance.result.then(function (result) {
+        $http.delete('/api/reviews/'+review._id)
+        .then(function (){
+          angular.forEach($scope.reviews, function(r, i) {
+            if (r === review) {
+              $scope.reviews.splice(i, 1);
+            }
+          });
+          Flash.create('success', 'Review deleted.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
+        });
+      });
+    };
+
+    // Delete a question
+    $scope.deleteQuestion = function(question) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modalDeleteQuestion.html',
+        controller: 'DeleteQuestionModalCtrl',
+        size: 'sm'
+      });
+
+      modalInstance.result.then(function (result) {
+        $http.delete('/api/questions/'+question._id)
+        .then(function (){
+          angular.forEach($scope.questions, function(q, i) {
+            if (q === question) {
+              $scope.questions.splice(i, 1);
+            }
+          });
+          Flash.create('success', 'Question deleted.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
+        });
+      });
+    };
   });
 
-// Controller for edit modal
+// Controller for user edit modal
 angular.module('digitaleducatorsApp').controller('EditModalCtrl', function ($scope, $uibModalInstance, userinfo) {
   $scope.userinfo = userinfo;
 
@@ -129,7 +189,7 @@ angular.module('digitaleducatorsApp').controller('EditModalCtrl', function ($sco
   }
 });
 
-// Controller for role/privileges modal
+// Controller for user role/privileges modal
 angular.module('digitaleducatorsApp').controller('RoleModalCtrl', function ($scope, $uibModalInstance, newrole) {
   $scope.newrole = newrole;
 
@@ -142,8 +202,30 @@ angular.module('digitaleducatorsApp').controller('RoleModalCtrl', function ($sco
   };
 });
 
-// Controller for delete modal
+// Controller for user delete modal
 angular.module('digitaleducatorsApp').controller('DeleteModalCtrl', function ($scope, $uibModalInstance) {
+  $scope.yes = function () {
+    $uibModalInstance.close(true);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
+});
+
+// Controller for review delete modal
+angular.module('digitaleducatorsApp').controller('DeleteReviewModalCtrl', function ($scope, $uibModalInstance) {
+  $scope.yes = function () {
+    $uibModalInstance.close(true);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
+});
+
+// Controller for question delete modal
+angular.module('digitaleducatorsApp').controller('DeleteQuestionModalCtrl', function ($scope, $uibModalInstance) {
   $scope.yes = function () {
     $uibModalInstance.close(true);
   };

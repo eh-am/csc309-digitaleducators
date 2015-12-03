@@ -3,3 +3,7 @@
 .controlbuttons { text-align: right; }
 
 .controlbuttons a { cursor: pointer; }
+
+.manageoptions a { cursor: pointer; }
+
+.admintab { padding-top: 0.5em; }
