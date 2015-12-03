@@ -14,6 +14,20 @@ angular.module('digitaleducatorsApp')
       $scope.reviews = reviews;
     });
 
+    $scope.getStars = function(rating) {
+      var r = rating;
+      if (isNaN(rating)) r = 0;
+
+      return (new Array(parseInt(r)));
+    }
+
+    $scope.getEmptyStars = function(rating) {
+      var r = rating;
+      if (isNaN(rating)) r = 0;
+
+      return (new Array(parseInt(5-r)));
+    }
+
     // Get questions
     $http.get('/api/questions/').success(function (questions){
       $scope.questions = questions;
@@ -28,7 +42,7 @@ angular.module('digitaleducatorsApp')
         size: 'lg',
         resolve: {
           userinfo: function(){
-            return user;
+            return angular.copy(user);
           }
         }
       });
@@ -107,6 +121,37 @@ angular.module('digitaleducatorsApp')
           if (u === user) {
             $scope.users.splice(i, 1);
           }
+        });
+      });
+    };
+
+    // Edit a review
+    $scope.editReview = function(review) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'app/admin/modal/modalEditReview.html',
+        controller: 'EditReviewModalCtrl',
+        size: 'lg',
+        resolve: {
+          reviewinfo: function(){
+            return angular.copy(review);
+          }
+        }
+      });
+
+      modalInstance.result.then(function (result) {
+        var info = {
+          _id: review._id,
+          rating: result.rating,
+          review: result.review
+        };
+
+        $http.put('/api/reviews/'+review._id, info)
+        .then(function (){
+          Flash.create('success', 'Review successfully changed.', 'flash-message');
+        })
+        .catch(function (){
+          Flash.create('danger', 'An error occurred.', 'flash-message');
         });
       });
     };
@@ -210,6 +255,24 @@ angular.module('digitaleducatorsApp').controller('DeleteModalCtrl', function ($s
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('Cancel');
+  };
+});
+
+// Controller for review edit modal
+angular.module('digitaleducatorsApp').controller('EditReviewModalCtrl', function ($scope, $uibModalInstance, reviewinfo) {
+  $scope.reviewinfo = reviewinfo;
+  $scope.max = 5;
+
+  $scope.editReview = function () {
+    $uibModalInstance.close($scope.reviewinfo);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('Cancel');
+  };
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
   };
 });
 
