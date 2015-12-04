@@ -28,7 +28,7 @@ bower install
 npm install
 ##talvez dê para tirar alguns comandos, depois testo.
 
-And access our page on http://localhost:9000/ !
+And access our page on http://localhost:3000/ !
 
 ##Troubleshooting
 
