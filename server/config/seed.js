@@ -11,9 +11,9 @@ var Inbox = require('../api/inbox/inbox.model');
 
 
 
-Inbox.find({}).remove(function (){
-  console.log("Cleaned up inbox collection");  
-});
+//Inbox.find({}).remove(function (){
+//  console.log("Cleaned up inbox collection");  
+//});
 
 
 User.find({}).remove(function() {
@@ -32,9 +32,9 @@ User.find({}).remove(function() {
 
 
       console.log('finished populating users');
-      Question.find({}).remove(function(){
-        console.log("removed all questions");
-      });
+  //    Question.find({}).remove(function(){
+    //    console.log("removed all questions");
+     //  });
 
       // console.log("creating one question");
       // User.findOne({'email': 'admin@admin.com'}, function(err, obj){
