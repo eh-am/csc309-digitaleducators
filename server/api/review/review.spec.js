@@ -61,6 +61,7 @@ describe('Review Model', function() {
     });
   });
 
+  //Test cases
   it('should begin with no reviews', function(done) {
     Review.find({}, function(err, reviews) {
       reviews.should.have.length(0);
