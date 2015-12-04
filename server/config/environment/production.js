@@ -11,8 +11,8 @@ module.exports = {
   // Server port
   port:     process.env.OPENSHIFT_NODEJS_PORT ||
             process.env.PORT ||
-            8080,
-
+           // 8080,
+            3000,
   // MongoDB connection options
   mongo: {
     uri:    process.env.MONGOLAB_URI ||
