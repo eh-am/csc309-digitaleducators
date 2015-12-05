@@ -7,20 +7,26 @@ var ReviewSchema = new Schema({
   rating: {
   	type: Number,
   	min: 0,
-  	max: 5
+  	max: 5,
+    required: true
   },
-  review: String,
+  review: {
+    type: String,
+    required: true
+  },
   date: {
   	type: Date,
   	default: Date.now
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   reviewer : {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   }
 });
 
