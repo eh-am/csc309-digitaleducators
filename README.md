@@ -55,12 +55,11 @@ password: test
 
 If you wish to build and run the production (optimized) version, execute:
 ```
-$ grunt build --force
-$ grunt buildcontrol:heroku --force
+$ grunt build
 $ cd dist/
 $ npm start --production
 ```
-
+NOTE: if "grunt build" fails (especially under linux), use "grunt build --force" instead.
 
 A nice walkthrough to understand what's the workflow when using 
 this generator can be found here:
