@@ -3,12 +3,21 @@
 We are going to use [Yeoman generator](http://timothymartin.azurewebsites.net/yeoman-mean-generator/), as it provides a lot of stuff we are going
 to use.
 
-
-To run this project, first install yo, grunt-cli, bower and generator-angular-fullstack:
-
+To run this project we will need to:
+- install globally: yo, grunt-cli, bower and generator-angular-fullstack 
+	note: if you are under linux use "sudo" as you will need administrator privileges.
+- install locally: grunt 
+- execute bower and npm install (read note below if you get error)
 ```
 $ npm install -g yo grunt-cli bower generator-angular-fullstack
+$ npm install grunt
+$ bower install
+$ npm install
 ```
+NOTE: if you are under linux and get "/usr/bin/end: No such file or directory" error when trying to run "bower install", execute the following:
+$ sudo ln -s /usr/bin/nodejs /usr/bin/node
+and try again.
+
 
 Start mongo daemon
 ```
@@ -20,14 +29,6 @@ Then, inside the folder of this project, run
 $ grunt serve
 ```
 
-###formatar
-para funcionar tive que usar mais isso (windows)
-npm install -g  grunt 
-npm install -g bower
-bower install
-npm install
-##talvez dê para tirar alguns comandos, depois testo.
-
 And access our page on http://localhost:3000/ !
 
 ##Troubleshooting
@@ -35,13 +36,8 @@ And access our page on http://localhost:3000/ !
 If you run into file access/permission problems during the installation, please refer to this guide:
 https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md.
 
-npm install -g grunt npm install -g bower
-bower install
-npm install
-
-# Other stuff
-We are going to use 2 basic users for testing (just for keeping an standard),
-those are
+# Other observations
+We are going to use 2 basic users for testing (just for keeping an standard), those are:
 
 Admin
 ```
@@ -55,6 +51,17 @@ email: test@test.com
 password: test
 ```
 
+##Deploy
+
+If you wish to build and run the production (optimized) version, execute:
+```
+$ grunt build --force
+$ grunt buildcontrol:heroku --force
+$ cd dist/
+$ npm start --production
+```
+
+
 A nice walkthrough to understand what's the workflow when using 
 this generator can be found here:
 http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/.
@@ -62,9 +69,3 @@ Keep the generator-angular-fullstack documentation in hand as well:
 https://github.com/DaftMonk/generator-angular-fullstack/blob/master/readme.md
 
 
-#Deploy
-```
-grunt build
-
-grunt buildcontrol:heroku
-```
