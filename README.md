@@ -1,12 +1,14 @@
 #Getting started
 
+**IF YOU ARE THE TA, PLEASE READ OUR [TA-README](TA-README.md)!**
+
 We are going to use [Yeoman generator](http://timothymartin.azurewebsites.net/yeoman-mean-generator/), as it provides a lot of stuff we are going
 to use.
 
 To run this project we will need to:
-- install globally: yo, grunt-cli, bower and generator-angular-fullstack 
+- install globally: yo, grunt-cli, bower and generator-angular-fullstack
 	note: if you are under linux use "sudo" as you will need administrator privileges.
-- install locally: grunt 
+- install locally: grunt
 - execute bower and npm install (read note below if you get error)
 ```
 $ npm install -g yo grunt-cli bower generator-angular-fullstack
@@ -61,10 +63,8 @@ $ npm start --production
 ```
 NOTE: if "grunt build" fails (especially under linux), use "grunt build --force" instead.
 
-A nice walkthrough to understand what's the workflow when using 
+A nice walkthrough to understand what's the workflow when using
 this generator can be found here:
 http://tylerhenkel.com/building-an-angular-node-comment-app-using-yeoman/.
 Keep the generator-angular-fullstack documentation in hand as well:
 https://github.com/DaftMonk/generator-angular-fullstack/blob/master/readme.md
-
-
