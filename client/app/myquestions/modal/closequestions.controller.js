@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('CloseQuestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth, closeQuestion, $$uibModalInstance) {
+  .controller('CloseQuestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth, closeQuestion, $uibModalInstance) {
     $scope.question = closeQuestion.getQuestion();
     $scope.price = $scope.question.price;
 
