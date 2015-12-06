@@ -9,8 +9,7 @@ that, you have three options:
 - Access our deployed application on http://digitaleducators.herokuapp.com/
 - Access our builded version with the following commands:
 ```
-  cd dist
-  npm install
+  npm install --production
   npm start --production
 ```
 
