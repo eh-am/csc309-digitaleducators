@@ -7,17 +7,21 @@ production version.
 To just run the application, you are better to run the production version, to do
 that, you have three options:
 - Access our deployed application on http://digitaleducators.herokuapp.com/
-- Access our builded version with the following commands:'
+- Access our builded version with the following commands:
+```
   cd dist
   npm install
   npm start --production
+```
 
 - Install all the necessaries development tools to build our application (it
 may take some time). To do that, after installing the tools (which the how to
 is explained later in this tutorial), run
+```
   grunt build
   cd dist
   npm start --production
+```
 
 
 The side effects of running a production version are that you cannot see
@@ -31,19 +35,25 @@ may occur.
 First, clone our repo, and enter it via the terminal.
 
 To install all the tools, run:
+```
 npm install -g yo grunt grunt-cli bower generator-fullstack
 npm install // to install all backend dependencies
 bower install // to install all frontend dependencies
+```
 
 Then, run
+```
 grunt serve
+```
 
 to start the server.
 
 You now should be able to our application on http://localhost:3000 !
 
 If you want to run some tests, run
+```
 grunt test:server
+```
 
 
 We have provided two default users, so that you can test our application. Those
