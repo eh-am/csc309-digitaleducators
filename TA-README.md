@@ -7,8 +7,9 @@ production version.
 To just run the application, you are better to run the production version, to do
 that, you have three options:
 - Access our deployed application on http://digitaleducators.herokuapp.com/
-- Access our builded version with the following commands:
+- Access our builded version with the following commands:'
   cd dist
+  npm install
   npm start --production
 
 - Install all the necessaries development tools to build our application (it
