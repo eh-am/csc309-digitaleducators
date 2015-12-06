@@ -15,9 +15,7 @@ var Inbox = require('../api/inbox/inbox.model');
 //  console.log("Cleaned up inbox collection");  
 //});
 
-
-User.find({}).remove(function() {
-  User.create({
+User.create({
     provider: 'local',
     name: 'Test User',
     email: 'test@test.com',
@@ -29,27 +27,44 @@ User.find({}).remove(function() {
     email: 'admin@admin.com',
     password: 'admin'
   }, function() {
-
-
-      console.log('finished populating users');
-  //    Question.find({}).remove(function(){
-    //    console.log("removed all questions");
-     //  });
-
-      // console.log("creating one question");
-      // User.findOne({'email': 'admin@admin.com'}, function(err, obj){
-      //   Question.find({}).remove(function(){
-      //   Question.create({
-      //     title: "I can't download a youtube video!",
-      //     text: "I've been struggling with this issue since last month (..) Integer lacinia turpis neque, sit amet ultricies ex ornare ut. Nulla porttitor, ante eget vulputate suscipit, justo magna ullamcorper elit, a ullamcorper est enim eu augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse at finibus elit. Donec non euismod metus. Morbi auctor magna in sapien facilisis placerat. Sed varius iaculis metus quis lacinia. Etiam vitae bibendum tellus.",
-      //     author: obj._id,
-      //     tags: ["Youtube", "Internet", "Video"]
-      //   });
-      // });
-
-      // });
-    }
-  );
+    console.log("finished populating users");
 });
+
+//       console.log('finished populating users');
+// User.find({}).remove(function() {
+//   User.create({
+//     provider: 'local',
+//     name: 'Test User',
+//     email: 'test@test.com',
+//     password: 'test'
+//   }, {
+//     provider: 'local',
+//     role: 'admin',
+//     name: 'Admin',
+//     email: 'admin@admin.com',
+//     password: 'admin'
+//   }, function() {
+
+
+//       console.log('finished populating users');
+//   //    Question.find({}).remove(function(){
+//     //    console.log("removed all questions");
+//      //  });
+
+//       // console.log("creating one question");
+//       // User.findOne({'email': 'admin@admin.com'}, function(err, obj){
+//       //   Question.find({}).remove(function(){
+//       //   Question.create({
+//       //     title: "I can't download a youtube video!",
+//       //     text: "I've been struggling with this issue since last month (..) Integer lacinia turpis neque, sit amet ultricies ex ornare ut. Nulla porttitor, ante eget vulputate suscipit, justo magna ullamcorper elit, a ullamcorper est enim eu augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse at finibus elit. Donec non euismod metus. Morbi auctor magna in sapien facilisis placerat. Sed varius iaculis metus quis lacinia. Etiam vitae bibendum tellus.",
+//       //     author: obj._id,
+//       //     tags: ["Youtube", "Internet", "Video"]
+//       //   });
+//       // });
+
+//       // });
+//     }
+//   );
+// });
 
 

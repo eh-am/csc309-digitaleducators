@@ -13,13 +13,15 @@ angular.module('digitaleducatorsApp')
     $http.get('/api/questions/getOpenQuestions').success(function (questions){
       $scope.questions = questions;
       $scope.addSpecialties();   
+      $scope.currentUser = Auth.getCurrentUser();      
     });
 
     $scope.filterAreas = function(question){
       // if there's no question, do nothing
       if (!question){ return false; }
+
       // a user can't see his own question
-      if ($scope.currentUser._id == question.author._id){ return false; }
+      if (Auth.getCurrentUser() && Auth.getCurrentUser()._id == question.author._id){ return false; }
 
 
       if ($scope.searchAreas === "") return true;
@@ -42,6 +44,8 @@ angular.module('digitaleducatorsApp')
     }
 
     $scope.addSpecialties = function(){
+      if (!Auth.getCurrentUser().areas) return;
+
       $scope.searchAreas = Auth.getCurrentUser().areas.filter(function(area){ return area.name == "" ? false : true}).map(function (area){
         return area.name;
       }).join(" ");

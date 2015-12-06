@@ -15,6 +15,5 @@ angular.module('digitaleducatorsApp')
     return {
       getQuestion: getQuestion,
       setQuestion: setQuestion
-
     }
   });

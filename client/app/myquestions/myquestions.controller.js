@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('digitaleducatorsApp')
-  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth) {
+  .controller('MyquestionsCtrl', function ($scope, $http, $location, $uibModal, Flash, Auth, closeQuestion) {
     var loadQuestions = function(){
       $http.post('/api/questions/myQuestions').success(function (questions){
         $scope.questionStatus = "all";
@@ -37,31 +37,13 @@ angular.module('digitaleducatorsApp')
     };
 
     $scope.closeHelp = function(question){
+      closeQuestion.setQuestion(question);
       var modal = $uibModal.open({
         modal:{
           dismissable: true, 
         },        
         templateUrl: 'app/myquestions/modal/modalCloseQuestion.html',
-        controller: function applyController($scope, $uibModalInstance, Auth){
-          $scope.price = question.price;
-
-          $scope.hasEnoughMoney = function(){
-            if (Auth.getCurrentUser().balance >= $scope.price) return true;
-            return false;
-          }
-
-
-          $scope.endHelp = function(){      
-            $http.post('/api/questions/endHelp', {questionId : question._id}).success(function (question){
-              $uibModalInstance.dismiss();
-              loadQuestions();
-
-              Flash.create('success', "You ended your help session successfully." + 
-                "<a href='/users/"+ question.helper._id + "'>How about revewing this person?</a> ", 'flash-message');
-            });
-            
-          }
-        }
+        controller: 'CloseQuestionsCtrl'
       });
     }
 
