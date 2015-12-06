@@ -13,8 +13,7 @@ angular.module('digitaleducatorsApp')
 
     $scope.endHelp = function(){      
       $http.post('/api/questions/endHelp', {questionId : $scope.question._id}).success(function (question){
-        $uibModalInstance.dismiss();
-        loadQuestions();
+        $uibModalInstance.dismiss();        
 
         Flash.create('success', "You ended your help session successfully." + 
           "<a href='/users/"+ question.helper._id + "'>How about revewing this person?</a> ", 'flash-message');
