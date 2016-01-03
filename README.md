@@ -1,5 +1,9 @@
 #Getting started
 
+**This is a project for CSC309 at University of Toronto made by Alan Gomes, Daniela Yassuda, Eduardo Aleixo and Lucas Fuser.
+There's a live version on http://digitaleducators.herokuapp.com/, but remember, this was made only for academic purposes.
+**
+
 **IF YOU ARE THE TA, PLEASE READ OUR [TA-README](TA-README.md)!**
 
 We are going to use [Yeoman generator](http://timothymartin.azurewebsites.net/yeoman-mean-generator/), as it provides a lot of stuff we are going
