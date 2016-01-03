@@ -21,11 +21,11 @@ module.exports = {
             'mongodb://localhost/digitaleducators'
   },
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '535579569939327',
-    clientSecret: process.env.FACEBOOK_SECRET || '58b3281d3d878e4959260d6d211e9f1a'
+    clientID: process.env.FACEBOOK_ID || '',
+    clientSecret: process.env.FACEBOOK_SECRET || ''
   },
   google: {
-    clientId: process.env.GOOGLE_ID || '501731194684-dp4ehdiq0umauec37nvp3eq7u02qu9ms.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_SECRET || '0H-QjL1tjze4LuCQqWEiofgz',
+    clientId: process.env.GOOGLE_ID || '',
+    clientSecret: process.env.GOOGLE_SECRET || '',
   },
 };

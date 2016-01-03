@@ -9,14 +9,14 @@ module.exports = {
   DOMAIN:           'http://localhost:3000',
   SESSION_SECRET:   'digitaleducators-secret',
 
-  FACEBOOK_ID:      '535579569939327',
-  FACEBOOK_SECRET:  '58b3281d3d878e4959260d6d211e9f1a',
+  FACEBOOK_ID:      'app-id',
+  FACEBOOK_SECRET:  'secret',
 
-  TWITTER_ID:       'yMzoHfuhv9nN0xAyHMhqUWhys',
-  TWITTER_SECRET:   'FjhGJ3zxcRKvWO8rmLsaDvZLXfkm5LIZnMSZMHcQmH6rXTmWZC',
+  TWITTER_ID:       'app-id',
+  TWITTER_SECRET:   'secret',
 
-  GOOGLE_ID:        '501731194684-dp4ehdiq0umauec37nvp3eq7u02qu9ms.apps.googleusercontent.com',
-  GOOGLE_SECRET:    '0H-QjL1tjze4LuCQqWEiofgz',
+  GOOGLE_ID:        'app-id',
+  GOOGLE_SECRET:    'secret',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
